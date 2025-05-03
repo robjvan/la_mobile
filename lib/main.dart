@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:la_mobile/utilities/routes.dart';
+import 'package:la_mobile/utilities/theme.dart';
+import 'package:la_mobile/utilities/translations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
