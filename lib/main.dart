@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,8 @@ void main() async {
 
 @immutable
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(final BuildContext context) {
     return GetMaterialApp(
