@@ -1,20 +1,20 @@
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/pages/about-page/about.page.dart';
-import 'package:la_mobile/pages/add-plant-page/add-plant.page.dart';
-import 'package:la_mobile/pages/contact-page/contact-us.page.dart';
-import 'package:la_mobile/pages/forgot-pass-page/forgot-password.page.dart';
-import 'package:la_mobile/pages/home-page/home.page.dart';
-import 'package:la_mobile/pages/login-page/login.page.dart';
-import 'package:la_mobile/pages/privacy-page/privacy.page.dart';
-import 'package:la_mobile/pages/profile-page/profile.page.dart';
-import 'package:la_mobile/pages/register-page/register.page.dart';
-import 'package:la_mobile/pages/settings-page/settings.page.dart';
-import 'package:la_mobile/pages/splash-page/splash.page.dart';
-import 'package:la_mobile/pages/tos-page/tos.page.dart';
+import 'package:la_mobile/pages/about_page/about.page.dart';
+import 'package:la_mobile/pages/add_plant_page/add_plant.page.dart';
+import 'package:la_mobile/pages/contact_page/contact_us.page.dart';
+import 'package:la_mobile/pages/forgot_pass_page/forgot_password.page.dart';
+import 'package:la_mobile/pages/home_page/home.page.dart';
+import 'package:la_mobile/pages/login_page/login.page.dart';
+import 'package:la_mobile/pages/privacy_page/privacy.page.dart';
+import 'package:la_mobile/pages/profile_page/profile.page.dart';
+import 'package:la_mobile/pages/register_page/register.page.dart';
+import 'package:la_mobile/pages/settings_page/settings.page.dart';
+import 'package:la_mobile/pages/splash_page/splash.page.dart';
+import 'package:la_mobile/pages/tos_page/tos.page.dart';
 
 class AppRoutes {
-  static const String initialRoute = kInitialRouteName;
+  static const String initialRoute = kSplashPage;
 
   /// Define the routes for the app
   static final List<GetPage<dynamic>> getPages = <GetPage<dynamic>>[
