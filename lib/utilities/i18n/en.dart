@@ -6,6 +6,9 @@ final Map<String, String> englishStrings = <String, String>{
   'save': 'Save',
   'ok': 'OK',
   'error': 'Error',
+  'loading': 'Loading...',
+  'yes': 'Yes',
+  'no': 'No',
   //
   'drawer.about_app': 'About LeafAlert',
   //
@@ -39,7 +42,7 @@ final Map<String, String> englishStrings = <String, String>{
   //
   'profile': 'Profile',
   'profile.billing_address': 'Billing Address',
-  'profile.collection_count': 'You have @numRecipes @msg in your collection',
+  'profile.collection_count': 'You have @numPlants @msg in your collection',
   'profile.enter-new-password': 'Enter the new password',
   'profile.greeting.morning': 'Good morning',
   'profile.greeting.afternoon': 'Good afternoon',
@@ -62,32 +65,11 @@ final Map<String, String> englishStrings = <String, String>{
   'profile.update_address': 'Update Address',
   'profile.update-password': 'Update Password',
   //
-  'recipe.allergens': 'Allergens',
-  'recipe.calories': 'Calories',
-  'recipe.carbs': 'Carbohydrates',
-  'recipe.cholesterol': 'Cholesterol',
-  'recipe.confirm-delete-header': 'Confirm Delete',
-  'recipe.confirm-delete': 'ArE yOu SuRe?  tHiS cAnNoT bE uNdOnE!1!',
-  'recipe.fiber': 'Dietary Fiber',
-  'recipe.ingredients': 'Ingredients',
-  'recipe.instructions': 'Instructions',
-  'recipe.nutrition-info': 'Nutritional Info',
-  'recipe.protein': 'Protein',
-  'recipe.satFats': 'Saturated Fats',
-  'recipe.sodium': 'Sodium',
-  'recipe.sugars': 'Sugars',
-  'recipe.totalFats': 'Total Fats',
-  //
-  //
-  'request-recipe.generating-recipe': 'Generating Recipe...',
-  'request-recipe.generate-recipe': 'Generate New Recipe',
-  'request-recipe.header': 'What would you like to make?',
-  'request-recipe.hint':
-      'ie. "Fried chicken", "Cheese Pizza", or "Scrambled Eggs"',
-  //
   'settings': 'Settings',
-  'settings.global_count': '@numRecipes recipes in the global database',
+  'settings.global_count': '@numPlants plants in the global database',
   //
   'splash.connected': 'Connected!',
   'splash.connecting': 'Connecting to server ...',
+  'splash.connection-failed':
+      'Could not connect to the LeafAlert server, please try again later.',
 };
