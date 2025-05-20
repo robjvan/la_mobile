@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/settings.controller.dart';
-import 'package:la_mobile/pages/login-page/login_page_widgets.dart';
+import 'package:la_mobile/pages/login_page/login_page_widgets.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LoginPage extends StatefulWidget {
