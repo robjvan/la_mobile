@@ -3,7 +3,7 @@ const double kAppBarHeight = 56.0;
 const double kLiquidRefreshHeight = 56.0;
 
 /// Path to the app logo image file.
-const String kAppLogoPath = 'assets/icon/icon.png';
+const String kAppLogoPath = 'assets/logo/logo.png';
 
 /// Hero tag for the app logo.
 const String kAppLogoHeroTag = 'logo';
@@ -27,4 +27,7 @@ const String kTermsOfServiceRouteName = '/terms-of-service';
 const String kAddPlantPage = '/add-plant';
 const String kSplashPage = '/splash';
 
-//
+const String kLoginEndpoint = 'auth/login';
+const String kRegisterEndpoint = '';
+const String kForgotPasswordEndpoint = '';
+const String kSubmitPasswordEndpoint = '';
