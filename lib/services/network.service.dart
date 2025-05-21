@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/controllers/plants.controller.dart';
 import 'package:la_mobile/controllers/user.controller.dart';
 import 'package:la_mobile/secrets.dart';
 
@@ -38,24 +36,27 @@ class NetworkService {
         body: <String, String>{'username': username, 'password': password},
       );
 
-      // print(response.statusCode);
-      // print(response.body);
-
-      if (response.statusCode == 500 &&
-          jsonDecode(response.body)['error'].contains('credentials')) {
-        print('bad creds bro');
-        // TODO(RV): Show user a dialog stating that credentials were incorrect
-      }
       return response;
     } on Exception catch (err) {
       print(err);
     }
   }
 
-  static void logout() {
-    UserController.clearUser();
-    PlantsController.clearPlants();
+  static Future<dynamic> fetchUserPlants() async {
+    try {
+      final http.Response response = await http.get(
+        Uri.parse(
+          '${AppSecrets.serverUrl}/$kPlantsEndpoint/byuser/${UserController.user.value.userId}',
+        ),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${UserController.user.value.accessToken}',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
 
-    Get.offAllNamed(kLoginRouteName);
+      return response;
+    } on Exception catch (err) {
+      print(err);
+    }
   }
 }
