@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/settings.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
