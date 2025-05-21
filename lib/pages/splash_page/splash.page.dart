@@ -44,7 +44,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkGrey,
+      backgroundColor: AppColors.bgColorLightMode,
       body: SizedBox(
         width: Get.width,
         child: Column(
@@ -56,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
               'app_title'.tr,
               style: Theme.of(
                 context,
-              ).textTheme.headlineLarge!.copyWith(color: AppColors.limeGreen),
+              ).textTheme.headlineLarge!.copyWith(color: AppColors.green),
             ),
             const SizedBox(height: 32),
             Text(
