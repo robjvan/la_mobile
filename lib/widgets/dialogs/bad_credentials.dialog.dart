@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/settings.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
-import 'package:la_mobile/widgets/la_button.dart';
+import 'package:la_mobile/widgets/buttons/la_button.dart';
 
 class BadCredentialsDialog extends StatelessWidget {
   const BadCredentialsDialog({super.key});
