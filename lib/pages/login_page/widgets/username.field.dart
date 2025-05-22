@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class UsernameField extends StatelessWidget {
@@ -14,7 +14,7 @@ class UsernameField extends StatelessWidget {
         controller: usernameController,
         style: TextStyle(
           color:
-              SettingsController.useDarkMode.value
+              AppStateController.useDarkMode.value
                   ? AppColors.textColorDarkMode
                   : AppColors.textColorLightMode,
         ),
@@ -34,9 +34,10 @@ class UsernameField extends StatelessWidget {
         ),
         validator: (final String? value) {
           if (value == null || value == '') {
-            return 'Username cannot be empty';
+            return 'Username cannot be empty'.tr; // TODO(RV): Add i18n strings
           } else if (!value.isEmail) {
-            return 'Username must be a valid email address';
+            return 'Username must be a valid email address'
+                .tr; // TODO(RV): Add i18n strings
           }
           return null;
         },

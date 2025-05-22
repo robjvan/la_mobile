@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/dialogs/plant_details.dialog.dart';
@@ -24,7 +24,7 @@ class PlantListTile extends StatelessWidget {
         plant.name ?? '',
         style: TextStyle(
           color:
-              SettingsController.useDarkMode.value
+              AppStateController.useDarkMode.value
                   ? AppColors.textColorDarkMode
                   : AppColors.textColorLightMode,
         ),
@@ -32,7 +32,8 @@ class PlantListTile extends StatelessWidget {
       subtitle: Text(
         plant.lastWateredAt != null
             ? 'Last watered: ${plant.lastWateredAt}'
-            : 'No watering records yet!',
+                .tr // TODO(RV): Add i18n strings
+            : 'No watering records yet!'.tr, // TODO(RV): Add i18n strings
       ),
       trailing:
           (plant.imageUrls == null) || (plant.imageUrls!.isEmpty)

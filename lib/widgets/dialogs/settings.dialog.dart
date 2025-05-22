@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
-import 'package:la_mobile/controllers/user.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
+import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/buttons/la_button.dart';
 
@@ -17,7 +17,7 @@ class SettingsDialog extends StatelessWidget {
         child: Obx(
           () => Scaffold(
             backgroundColor:
-                SettingsController.useDarkMode.value
+                AppStateController.useDarkMode.value
                     ? AppColors.bgColorDarkMode
                     : AppColors.bgColorLightMode,
             body: SizedBox(
@@ -33,11 +33,11 @@ class SettingsDialog extends StatelessWidget {
                     ),
                   ),
                   LaButton(
-                    action: SettingsController.toggleDarkMode,
+                    action: AppStateController.toggleDarkMode,
                     label: 'Toggle theme',
                   ),
                   Spacer(),
-                  LaButton(action: UserController.logout, label: 'Logout'),
+                  LaButton(action: UserStateController.logout, label: 'Logout'),
                   const SizedBox(height: 32.0),
                   LaButton(action: Get.back, label: 'Close'),
                   const SizedBox(height: 16.0),

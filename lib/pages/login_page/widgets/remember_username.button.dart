@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class RememberUsernameButton extends StatefulWidget {
@@ -30,11 +30,11 @@ class _RememberUsernameButtonState extends State<RememberUsernameButton> {
         children: <Widget>[
           Obx(
             () => Text(
-              'Rembember username?',
+              'Rembember username?'.tr, // TODO(RV): Add i18n strings
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color:
-                    SettingsController.useDarkMode.value
+                    AppStateController.useDarkMode.value
                         ? AppColors.textColorDarkMode
                         : AppColors.textColorLightMode,
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 
 @immutable
 class AppTheme {
@@ -12,22 +12,22 @@ class AppTheme {
   );
 
   static Color backgroundColor =
-      SettingsController.useDarkMode.value
+      AppStateController.useDarkMode.value
           ? AppColors.bgColorDarkMode
           : AppColors.bgColorLightMode;
 
   static Color accentColor =
-      SettingsController.useDarkMode.value
+      AppStateController.useDarkMode.value
           ? AppColors.green
           : AppColors.limeGreen;
 
   static Color textColor =
-      SettingsController.useDarkMode.value
+      AppStateController.useDarkMode.value
           ? AppColors.textColorDarkMode
           : AppColors.textColorLightMode;
 
   static Color secondaryTextColor =
-      SettingsController.useDarkMode.value
+      AppStateController.useDarkMode.value
           ? AppColors.green
           : AppColors.limeGreen;
 }

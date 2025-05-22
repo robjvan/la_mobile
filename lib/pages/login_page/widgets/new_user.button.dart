@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class NewUserButton extends StatelessWidget {
@@ -19,11 +19,11 @@ class NewUserButton extends StatelessWidget {
           },
           child: Obx(
             () => Text(
-              'New user? Register here',
+              'New user? Register here'.tr, // TODO(RV): Add i18n strings
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color:
-                    SettingsController.useDarkMode.value
+                    AppStateController.useDarkMode.value
                         ? AppColors.textColorDarkMode
                         : AppColors.textColorLightMode,
               ),

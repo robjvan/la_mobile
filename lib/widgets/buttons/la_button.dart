@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LaButton extends StatelessWidget {
@@ -21,12 +21,12 @@ class LaButton extends StatelessWidget {
             ),
           ),
           backgroundColor: WidgetStatePropertyAll<Color>(
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? const Color.fromRGBO(40, 40, 40, 1)
                 : AppColors.bgColorLightMode,
           ),
           foregroundColor: WidgetStatePropertyAll<Color>(
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.textColorDarkMode
                 : AppColors.green,
           ),

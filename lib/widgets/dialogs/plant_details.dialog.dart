@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
@@ -13,7 +13,7 @@ class PlantDetailsDialog extends StatelessWidget {
     return Obx(
       () => SimpleDialog(
         backgroundColor:
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.bgColorDarkMode
                 : AppColors.bgColorLightMode,
         title: Text(
@@ -21,7 +21,7 @@ class PlantDetailsDialog extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             color:
-                SettingsController.useDarkMode.value
+                AppStateController.useDarkMode.value
                     ? AppColors.textColorDarkMode
                     : AppColors.textColorLightMode,
           ),
@@ -31,7 +31,7 @@ class PlantDetailsDialog extends StatelessWidget {
             'blah blah'.tr,
             style: TextStyle(
               color:
-                  SettingsController.useDarkMode.value
+                  AppStateController.useDarkMode.value
                       ? AppColors.textColorDarkMode
                       : AppColors.textColorLightMode,
             ),
@@ -40,7 +40,7 @@ class PlantDetailsDialog extends StatelessWidget {
             'blah blah blah'.tr,
             style: TextStyle(
               color:
-                  SettingsController.useDarkMode.value
+                  AppStateController.useDarkMode.value
                       ? AppColors.textColorDarkMode
                       : AppColors.textColorLightMode,
             ),

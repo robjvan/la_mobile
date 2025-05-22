@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LaAppbar extends StatefulWidget {
@@ -19,11 +19,11 @@ class _LaAppbarState extends State<LaAppbar> {
       preferredSize: Size.fromHeight(kAppBarHeight),
       child: AppBar(
         backgroundColor:
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.bgColorDarkMode
                 : AppColors.bgColorLightMode,
         foregroundColor:
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.textColorDarkMode
                 : AppColors.textColorLightMode,
         leading: Image.asset('assets/logo/logo.png'),
@@ -32,21 +32,21 @@ class _LaAppbarState extends State<LaAppbar> {
           Obx(
             () => IconButton(
               icon: Icon(
-                SettingsController.viewAsList.value
+                AppStateController.viewAsList.value
                     ? Icons.view_list
                     : Icons.apps,
               ),
-              onPressed: SettingsController.toggleListView,
+              onPressed: AppStateController.toggleListView,
             ),
           ),
           Obx(
             () => IconButton(
               icon: Icon(
-                SettingsController.showFilterBar.value
+                AppStateController.showFilterBar.value
                     ? Icons.search_off
                     : Icons.search,
               ),
-              onPressed: SettingsController.toggleFilterBar,
+              onPressed: AppStateController.toggleFilterBar,
             ),
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
@@ -29,11 +29,11 @@ class ForgotPasswordButton extends StatelessWidget {
             ),
             child: Obx(
               () => Text(
-                'Forgot password?',
+                'Forgot password?'.tr, // TODO(RV): Add i18n strings
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color:
-                      SettingsController.useDarkMode.value
+                      AppStateController.useDarkMode.value
                           ? AppColors.textColorDarkMode
                           : AppColors.textColorLightMode,
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/pages/login_page/login_page_widgets.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     return Obx(
       () => Scaffold(
         backgroundColor:
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.bgColorDarkMode
                 : AppColors.bgColorLightMode,
         body: SingleChildScrollView(
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 const Spacer(),
                 Image.asset('assets/logo/logo.png', height: 250.0),
                 Text(
-                  'app_title'.tr,
+                  'app_title'.tr, // TODO(RV): Add i18n strings?
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     color: AppColors.green,
                     fontWeight: FontWeight.bold,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class PasswordField extends StatefulWidget {
@@ -21,7 +21,7 @@ class _PasswordFieldState extends State<PasswordField> {
         controller: widget.passwordController,
         style: TextStyle(
           color:
-              SettingsController.useDarkMode.value
+              AppStateController.useDarkMode.value
                   ? AppColors.textColorDarkMode
                   : AppColors.textColorLightMode,
         ),
@@ -47,9 +47,10 @@ class _PasswordFieldState extends State<PasswordField> {
         obscureText: passwordObscured,
         validator: (final String? value) {
           if (value == null || value == '') {
-            return 'Password cannot be empty';
+            return 'Password cannot be empty'.tr; // TODO(RV): Add i18n strings
           } else if (value.length < 6) {
-            return 'Password must at least 6 digits';
+            return 'Password must at least 6 digits'
+                .tr; // TODO(RV): Add i18n strings
           }
           return null;
         },

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/controllers/plants.controller.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
-import 'package:la_mobile/controllers/user.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
+import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/pages/home_page/widgets/plant_grid_tile.dart';
 import 'package:la_mobile/pages/home_page/widgets/plant_ilst_tile.dart';
 import 'package:la_mobile/utilities/theme.dart';
@@ -25,10 +24,12 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: LaSpeedDial(),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(kAppBarHeight),
-          child: LaAppbar(title: 'Dashboard'),
+          child: LaAppbar(
+            title: 'dashboard'.tr, // TODO(RV): Add i18n strings
+          ),
         ),
         backgroundColor:
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.bgColorDarkMode
                 : AppColors.bgColorLightMode,
         body: SizedBox(
@@ -40,11 +41,11 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 8.0),
                 Obx(
                   () => Text(
-                    'Hello ${UserController.user.value.username}',
+                    'Hello ${UserStateController.user.value.username}', // TODO(RV): Add i18n strings
                     style: TextStyle(
                       fontSize: 24.0,
                       color:
-                          SettingsController.useDarkMode.value
+                          AppStateController.useDarkMode.value
                               ? AppColors.textColorDarkMode
                               : AppColors.textColorLightMode,
                     ),
@@ -52,13 +53,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Obx(
                   () =>
-                      SettingsController.viewAsList.value
+                      AppStateController.viewAsList.value
                           ? ListView.builder(
-                            itemCount: PlantsController.userPlants.length,
+                            itemCount: UserStateController.userPlants.length,
                             shrinkWrap: true,
                             itemBuilder: (final _, final int index) {
                               return PlantListTile(
-                                PlantsController.userPlants[index],
+                                UserStateController.userPlants[index],
                               );
                             },
                           )
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 16.0,
                             ),
                             shrinkWrap: true,
-                            itemCount: PlantsController.userPlants.length,
+                            itemCount: UserStateController.userPlants.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                             itemBuilder: (final _, final int index) {
                               return PlantGridTile(
-                                PlantsController.userPlants[index],
+                                UserStateController.userPlants[index],
                               );
                             },
                           ),

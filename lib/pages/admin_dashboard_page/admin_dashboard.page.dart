@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/settings.controller.dart';
+import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class AdminDashboard extends StatelessWidget {
@@ -11,7 +11,7 @@ class AdminDashboard extends StatelessWidget {
     return Obx(
       () => Scaffold(
         backgroundColor:
-            SettingsController.useDarkMode.value
+            AppStateController.useDarkMode.value
                 ? AppColors.bgColorDarkMode
                 : AppColors.bgColorLightMode,
         body: Placeholder(),

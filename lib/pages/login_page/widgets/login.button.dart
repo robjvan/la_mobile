@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/controllers/plants.controller.dart';
-import 'package:la_mobile/controllers/user.controller.dart';
+import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/models/user.model.dart';
-import 'package:la_mobile/services/network.service.dart';
-import 'package:la_mobile/widgets/dialogs/bad_credentials.dialog.dart';
+import 'package:la_mobile/services/plants.service.dart';
+import 'package:la_mobile/services/users.services.dart';
 import 'package:la_mobile/widgets/buttons/la_button.dart';
+import 'package:la_mobile/widgets/dialogs/bad_credentials.dialog.dart';
 
 class LoginButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -27,18 +27,18 @@ class LoginButton extends StatelessWidget {
     return LaButton(
       action: () async {
         if (formKey.currentState!.validate()) {
-          final dynamic response = await NetworkService.login(
+          final dynamic response = await UsersService.login(
             usernameController.text,
             passwordController.text,
           );
 
           if (response.statusCode == 201) {
-            UserController.setUserData(
+            UserStateController.setUserData(
               UserModel.fromMap(jsonDecode(response.body)),
             );
 
             // Fetch user data - user, profile, plants, etc.
-            await PlantsController.fetchUserPlants();
+            await PlantsService.fetchUserPlants();
 
             unawaited(Get.offAllNamed(kHomeRouteName));
           } else {
@@ -46,7 +46,7 @@ class LoginButton extends StatelessWidget {
           }
         }
       },
-      label: 'Login',
+      label: 'login'.tr, // TODO(RV): Add i18n strings
     );
   }
 }
