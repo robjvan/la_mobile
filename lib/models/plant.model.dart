@@ -9,30 +9,32 @@ class PlantModel {
   final String? humidityPreference;
   final String? sunlightPreference;
   final String? soilType;
-  final int? fertilierIntervalDays;
+  final int? fertilizerIntervalDays;
   final String? lastFertilizedAt;
   final bool? fertilizerReminderEnabled;
   final List<dynamic>? tags;
   final double? waterAmount;
   final bool? archived;
+  final String? createdAt;
 
   PlantModel({
-    required this.name,
-    required this.species,
-    required this.imageUrls,
-    required this.location,
-    required this.notes,
-    required this.waterIntervalDays,
-    required this.lastWateredAt,
-    required this.humidityPreference,
-    required this.sunlightPreference,
-    required this.soilType,
-    required this.fertilierIntervalDays,
-    required this.lastFertilizedAt,
-    required this.fertilizerReminderEnabled,
-    required this.tags,
-    required this.waterAmount,
-    required this.archived,
+    this.name,
+    this.species,
+    this.imageUrls,
+    this.location,
+    this.notes,
+    this.waterIntervalDays,
+    this.lastWateredAt,
+    this.humidityPreference,
+    this.sunlightPreference,
+    this.soilType,
+    this.fertilizerIntervalDays,
+    this.lastFertilizedAt,
+    this.fertilizerReminderEnabled,
+    this.tags,
+    this.waterAmount,
+    this.archived,
+    this.createdAt,
   });
 
   factory PlantModel.initial() => PlantModel(
@@ -46,12 +48,13 @@ class PlantModel {
     humidityPreference: null,
     sunlightPreference: null,
     soilType: null,
-    fertilierIntervalDays: null,
+    fertilizerIntervalDays: null,
     lastFertilizedAt: null,
     fertilizerReminderEnabled: null,
     tags: null,
     waterAmount: null,
     archived: null,
+    createdAt: null,
   );
 
   factory PlantModel.fromMap(final Map<String, dynamic> json) => PlantModel(
@@ -65,12 +68,13 @@ class PlantModel {
     humidityPreference: json['humidityPreference'],
     sunlightPreference: json['sunlightPreference'],
     soilType: json['soilType'],
-    fertilierIntervalDays: json['fertilierIntervalDays'],
+    fertilizerIntervalDays: json['fertilierIntervalDays'],
     lastFertilizedAt: json['lastFertilizedAt'],
     fertilizerReminderEnabled: json['fertilizerReminderEnabled'],
     tags: json['tags'],
     waterAmount: json['waterAmount'],
     archived: json['archived'],
+    createdAt: json['createdAt'],
   );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -84,11 +88,12 @@ class PlantModel {
     'humidityPreference': humidityPreference,
     'sunlightPreference': sunlightPreference,
     'soilType': soilType,
-    'fertilierIntervalDays': fertilierIntervalDays,
+    'fertilierIntervalDays': fertilizerIntervalDays,
     'lastFertilizedAt': lastFertilizedAt,
     'fertilizerReminderEnabled': fertilizerReminderEnabled,
     'tags': tags,
     'waterAmount': waterAmount,
     'archived': archived,
+    'createdAt': createdAt,
   };
 }
