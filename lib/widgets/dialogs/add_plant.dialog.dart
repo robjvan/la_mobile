@@ -112,12 +112,12 @@ class _AddPlantDialogState extends State<AddPlantDialog> {
   }
 
   ElevatedButton buildSubmitButton() {
-    return ElevatedButton(onPressed: onSubmit, child: Text(''));
+    return ElevatedButton(onPressed: onSubmit, child: Text('Submit'));
   }
 
-  TextButton cancelButton() {
+  TextButton buildCancelButton() {
     return TextButton(
-      onPressed: () => Get.back,
+      onPressed: Get.back,
       child: Text(
         'cancel'.tr, // TODO(RV): Add i18n strings
       ),
@@ -138,54 +138,62 @@ class _AddPlantDialogState extends State<AddPlantDialog> {
                     : AppColors.bgColorLightMode,
             body: SizedBox(
               width: double.infinity,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 32.0),
-                      child: Text(
-                        'add-plant'.tr, // TODO(RV): Add i18n strings
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32.0),
+                    child: Text(
+                      'add-plant'.tr, // TODO(RV): Add i18n strings
+                      style: TextStyle(fontSize: 40.0, color: AppColors.green),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Form(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 32.0,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                // Name field
+                                buildTextInputField(
+                                  controller: nameController,
+                                  hintText:
+                                      'e.g. "Spider Plant" or "Mom\'s Lily"'
+                                          .tr, // TODO(RV): Add i18n strings
+                                  validator: (final dynamic val) {
+                                    // if (val == null) {
+                                    //   return 'Name cannot be empty!'
+                                    //       .tr; // TODO(RV): Add i18n strings
+                                    // }
+                                    return null;
+                                  },
+                                ),
 
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          color: AppColors.green,
+                                // Species field
+                                buildTextInputField(
+                                  controller: speciesController,
+                                  hintText:
+                                      'e.g. "Chlorophytum comosum" or "African Lily"'
+                                          .tr, // TODO(RV): Add i18n strings
+                                  validator: (final dynamic val) => null,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    Form(
-                      child: Column(
-                        children: <Widget>[
-                          // Name field
-                          buildTextInputField(
-                            controller: nameController,
-                            hintText:
-                                'Name of plant'
-                                    .tr, // TODO(RV): Add i18n strings
-
-                            validator: (final dynamic val) {
-                              if (!val) {
-                                return 'Name cannot be empty!'
-                                    .tr; // TODO(RV): Add i18n strings
-                              }
-                              return null;
-                            },
-                          ),
-
-                          // Species field
-                          buildTextInputField(
-                            controller: speciesController,
-                            hintText:
-                                'Plant Species'
-                                    .tr, // TODO(RV): Add i18n strings
-                            validator: (final dynamic val) => null,
-                          ),
-                        ],
-                      ),
-                    ),
-                    buildSubmitButton(),
-                  ],
-                ),
+                  ),
+                  Spacer(),
+                  buildSubmitButton(),
+                  const SizedBox(height: 8.0),
+                  buildCancelButton(),
+                  const SizedBox(height: 16.0),
+                ],
               ),
             ),
           ),

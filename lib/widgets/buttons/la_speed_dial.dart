@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
+import 'package:la_mobile/widgets/dialogs/add_plant.dialog.dart';
 import 'package:la_mobile/widgets/dialogs/settings.dialog.dart';
 
 class LaSpeedDial extends StatelessWidget {
@@ -73,7 +74,9 @@ class LaSpeedDial extends StatelessWidget {
           buildSpeedDialChild(
             Icon(Icons.add, color: AppColors.green),
             'Add new plant',
-            () {},
+            () async {
+              await Get.dialog(AddPlantDialog());
+            },
           ),
           buildSpeedDialChild(
             Icon(Icons.water_drop, color: AppColors.lightBlue),
