@@ -1,16 +1,46 @@
-# la_mobile
+# LeafAlert Mobile Application
 
-A new Flutter project.
+## User Features
 
-## Getting Started
+### Track plant watering and fertilizer
 
-This project is a starting point for a Flutter application.
+Cum dolores quia iste quia excepturi voluptatem quos aliquam. Consequuntur rerum fugit magni fugiat fuga. Ut sed expedita eum ut dolor corporis minus possimus. Vel distinctio atque reiciendis dolorem.
 
-A few resources to get you started if this is your first Flutter project:
+### Reminders and Notifications
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Dolorem aut repudiandae. Consequatur ipsum sed nihil doloribus totam. Veritatis qui est dignissimos.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### _Autofill plant species suggestions from DB?_
+
+_Impedit pariatur nesciunt cum. Minima omnis iure tempore nulla tempore qui ab dolor perspiciatis. Rerum vitae asperiores deleniti._
+
+## Developer Info
+
+### Setting up your dev environment
+Error ipsam possimus ut sit dolorum atque non. Officia odio aut vitae est accusamus consequatur. Et consequuntur adipisci odit ut dolorem libero. Quae laudantium odio adipisci id id libero.
+
+#### Framework versions
+
+This project was built using Flutter version `3.29.3` and Dart version `3.7.2`.
+
+#### Secrets file
+
+Necessitatibus aspernatur consequatur veniam tempore fugit. Laborum similique sint est. Sapiente et sit voluptas voluptate maiores in sed.
+
+### Building for release
+Deleniti iusto accusamus qui eaque. Iste nesciunt alias culpa dolor. Animi sunt cupiditate tempore ut consequatur aut eaque repellendus. Autem ut hic enim ut magni harum soluta.
+
+## Terms of Service
+Tempora occaecati alias vitae eum eligendi placeat illo commodi. Ea non in ut sit. Nulla id eos sunt suscipit occaecati possimus. Ea similique numquam vitae a.
+
+## Privacy Policy
+Et doloremque voluptas. Laudantium deleniti nostrum ipsum iure possimus perspiciatis. Et facilis dolor.
+
+## Download Links
+
+- [Play Store](https://)
+- [App Store](https://)
+
+## Contact Information
+
+App support - [support@robjvan.ca](mailto:support@robjvan.ca)
