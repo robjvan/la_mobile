@@ -24,11 +24,13 @@ const String kAboutRouteName = '/about';
 const String kContactUsRouteName = '/contact-us';
 const String kPrivacyPolicyRouteName = '/privacy-policy';
 const String kTermsOfServiceRouteName = '/terms-of-service';
-// const String kAddPlantPage = '/add-plant';
+const String kAddPlantPageRoutename = '/add-plant';
 const String kSplashPage = '/splash';
+const String kAdminDashboardRouteName = '/admin';
 
 const String kLoginEndpoint = 'auth/login';
 const String kRegisterEndpoint = '';
 const String kForgotPasswordEndpoint = '';
 const String kSubmitPasswordEndpoint = '';
 const String kPlantsEndpoint = 'plants';
+const String kAdminEndpoint = 'admin';
