@@ -17,7 +17,7 @@ class PlantsService {
 
   static Future<void> fetchUserPlants() async {
     try {
-      AppStateController.isLoading.value = true;
+      AppStateController.setLoadingState(true);
 
       final http.Response response = await http.get(
         Uri.parse(
@@ -29,13 +29,14 @@ class PlantsService {
       if (response.statusCode == 200) {
         final List<dynamic> plantList = jsonDecode(response.body);
 
-        UserStateController.userPlants.value =
-            plantList
-                .map((final dynamic plant) => PlantModel.fromMap(plant))
-                .toList();
+        UserStateController.setUserPlants(
+          plantList
+              .map((final dynamic plant) => PlantModel.fromMap(plant))
+              .toList(),
+        );
       }
 
-      AppStateController.isLoading.value = false;
+      AppStateController.setLoadingState(false);
     } on Exception catch (err) {
       print(err);
     }
@@ -44,20 +45,20 @@ class PlantsService {
   static Future<PlantModel?> addNewPlant(final PlantModel plant) async {
     // final dynamic response = await NetworkService.addNewPlant(plant);
     try {
-      AppStateController.isLoading.value = true;
+      AppStateController.setLoadingState(true);
 
       final http.Response response = await http.post(
         Uri.parse('${AppSecrets.serverUrl}/$kPlantsEndpoint/'),
-        body: plant,
+        body: jsonEncode(plant.toMap()),
         headers: buildAuthHeaders(),
       );
 
       // Reset the UI
-      AppStateController.isLoading.value = false;
+
+      AppStateController.setLoadingState(false);
 
       // Check to ensure record was returned successfully
-      if (response.statusCode == 201 &&
-          jsonDecode(response.body)['createdAt'] != null) {
+      if (response.statusCode == 201) {
         // Update our local plants list in the controller
         await PlantsService.fetchUserPlants();
 
