@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
+import 'package:la_mobile/services/local_storage.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class RememberUsernameButton extends StatefulWidget {
@@ -19,6 +20,9 @@ class _RememberUsernameButtonState extends State<RememberUsernameButton> {
     super.initState();
 
     // Check local storage for rememberUsername value, and if true, also load username
+    if (AppStateController.saveUsername.value) {
+      rememberUsername = true;
+    }
   }
 
   @override
@@ -30,7 +34,7 @@ class _RememberUsernameButtonState extends State<RememberUsernameButton> {
         children: <Widget>[
           Obx(
             () => Text(
-              'Rembember username?'.tr, // TODO(RV): Add i18n strings
+              'login.remember-username'.tr,
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color:
@@ -46,6 +50,11 @@ class _RememberUsernameButtonState extends State<RememberUsernameButton> {
               setState(() {
                 rememberUsername = !rememberUsername;
               });
+              if (value!) {
+                LocalStorageService.storeSaveUsernameSetting(true);
+              } else {
+                LocalStorageService.storeSaveUsernameSetting(false);
+              }
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
