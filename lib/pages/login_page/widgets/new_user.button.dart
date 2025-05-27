@@ -19,7 +19,7 @@ class NewUserButton extends StatelessWidget {
           },
           child: Obx(
             () => Text(
-              'New user? Register here'.tr, // TODO(RV): Add i18n strings
+              'login.register'.tr,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color:

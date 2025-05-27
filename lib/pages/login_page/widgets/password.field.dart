@@ -47,10 +47,9 @@ class _PasswordFieldState extends State<PasswordField> {
         obscureText: passwordObscured,
         validator: (final String? value) {
           if (value == null || value == '') {
-            return 'Password cannot be empty'.tr; // TODO(RV): Add i18n strings
+            return 'login.password-error'.tr;
           } else if (value.length < 6) {
-            return 'Password must at least 6 digits'
-                .tr; // TODO(RV): Add i18n strings
+            return 'login.password-too-short'.tr;
           }
           return null;
         },

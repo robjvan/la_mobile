@@ -29,7 +29,7 @@ class ForgotPasswordButton extends StatelessWidget {
             ),
             child: Obx(
               () => Text(
-                'Forgot password?'.tr, // TODO(RV): Add i18n strings
+                'login.forgot-password'.tr,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color:

@@ -34,10 +34,9 @@ class UsernameField extends StatelessWidget {
         ),
         validator: (final String? value) {
           if (value == null || value == '') {
-            return 'Username cannot be empty'.tr; // TODO(RV): Add i18n strings
+            return 'login.username-error'.tr;
           } else if (!value.isEmail) {
-            return 'Username must be a valid email address'
-                .tr; // TODO(RV): Add i18n strings
+            return 'login.invalid-username'.tr;
           }
           return null;
         },
