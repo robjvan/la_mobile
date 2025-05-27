@@ -41,7 +41,9 @@ class PlantGridTile extends StatelessWidget {
           ),
         ),
         child:
-            (plant.imageUrls != null) && (plant.imageUrls!.isNotEmpty)
+            (plant.imageUrls != null) &&
+                    plant.imageUrls!.isNotEmpty &&
+                    plant.imageUrls![0] != null
                 ? CachedNetworkImage(imageUrl: plant.imageUrls![0])
                 : Image.asset('assets/images/image_placeholder.png'),
       ),
