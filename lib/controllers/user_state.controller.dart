@@ -9,6 +9,8 @@ class UserStateController {
 
   static RxList<PlantModel> userPlants = <PlantModel>[].obs;
 
+  static RxString username = ''.obs;
+
   static void setUserData(final UserModel user) =>
       UserStateController.user.value = user;
 
