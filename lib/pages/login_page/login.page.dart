@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
+import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/pages/login_page/login_page_widgets.dart';
+import 'package:la_mobile/services/local_storage.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,10 +26,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    LocalStorageService.loadSaveUsernameSetting();
 
-    // Used for testing, remove for prod
-    usernameController.text = 'dad@dad.com';
+    //! Used for testing, remove for prod
+    // usernameController.text = 'dad@dad.com';
     passwordController.text = 'Asdf123!';
+    if (AppStateController.saveUsername.value) {
+      usernameController.text = UserStateController.username.value;
+    }
   }
 
   @override
@@ -53,9 +60,9 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Spacer(),
-                Image.asset('assets/logo/logo.png', height: 250.0),
+                Image.asset(kAppLogoPath, height: 250.0),
                 Text(
-                  'app_title'.tr, // TODO(RV): Add i18n strings?
+                  'app_title'.tr,
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     color: AppColors.green,
                     fontWeight: FontWeight.bold,
