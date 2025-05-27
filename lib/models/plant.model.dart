@@ -11,14 +11,19 @@ class PlantModel {
   final String? soilType;
   final int? fertilizerIntervalDays;
   final String? lastFertilizedAt;
-  final bool? fertilizerReminderEnabled;
+  final bool fertilizerReminderEnabled;
+  final bool wateringReminderEnabled;
   final List<dynamic>? tags;
   final double? waterAmount;
   final bool? archived;
   final String? createdAt;
+  final int? userId;
 
   PlantModel({
-    this.name,
+    required this.name,
+    required this.fertilizerReminderEnabled,
+    required this.wateringReminderEnabled,
+    required this.userId,
     this.species,
     this.imageUrls,
     this.location,
@@ -30,7 +35,6 @@ class PlantModel {
     this.soilType,
     this.fertilizerIntervalDays,
     this.lastFertilizedAt,
-    this.fertilizerReminderEnabled,
     this.tags,
     this.waterAmount,
     this.archived,
@@ -50,11 +54,12 @@ class PlantModel {
     soilType: null,
     fertilizerIntervalDays: null,
     lastFertilizedAt: null,
-    fertilizerReminderEnabled: null,
+    fertilizerReminderEnabled: false,
+    wateringReminderEnabled: false,
     tags: null,
     waterAmount: null,
     archived: null,
-    createdAt: null,
+    userId: null,
   );
 
   factory PlantModel.fromMap(final Map<String, dynamic> json) => PlantModel(
@@ -70,11 +75,13 @@ class PlantModel {
     soilType: json['soilType'],
     fertilizerIntervalDays: json['fertilierIntervalDays'],
     lastFertilizedAt: json['lastFertilizedAt'],
-    fertilizerReminderEnabled: json['fertilizerReminderEnabled'],
+    fertilizerReminderEnabled: json['fertilizerReminderEnabled'] ?? false,
+    wateringReminderEnabled: json['wateringReminderEnabled'] ?? false,
     tags: json['tags'],
     waterAmount: json['waterAmount'],
     archived: json['archived'],
     createdAt: json['createdAt'],
+    userId: json['userId'],
   );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -91,9 +98,11 @@ class PlantModel {
     'fertilierIntervalDays': fertilizerIntervalDays,
     'lastFertilizedAt': lastFertilizedAt,
     'fertilizerReminderEnabled': fertilizerReminderEnabled,
+    'wateringReminderEnabled': wateringReminderEnabled,
     'tags': tags,
     'waterAmount': waterAmount,
     'archived': archived,
     'createdAt': createdAt,
+    'userId': userId,
   };
 }
