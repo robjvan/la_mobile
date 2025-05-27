@@ -1,15 +1,13 @@
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/pages/about_page/about.page.dart';
+import 'package:la_mobile/pages/add_plant_page/add_plant.page.dart';
+import 'package:la_mobile/pages/admin_dashboard_page/admin_dashboard.page.dart';
 import 'package:la_mobile/pages/contact_page/contact_us.page.dart';
 import 'package:la_mobile/pages/forgot_pass_page/forgot_password.page.dart';
 import 'package:la_mobile/pages/home_page/home.page.dart';
 import 'package:la_mobile/pages/login_page/login.page.dart';
-import 'package:la_mobile/pages/privacy_page/privacy.page.dart';
-// import 'package:la_mobile/pages/profile_page/profile.page.dart';
 import 'package:la_mobile/pages/register_page/register.page.dart';
 import 'package:la_mobile/pages/splash_page/splash.page.dart';
-import 'package:la_mobile/pages/tos_page/tos.page.dart';
 
 class AppRoutes {
   static const String initialRoute = kSplashPage;
@@ -24,13 +22,9 @@ class AppRoutes {
       page: ForgotPasswordPage.new,
     ),
     // GetPage<dynamic>(name: kProfileRouteName, page: ProfilePage.new),
-    GetPage<dynamic>(name: kAboutRouteName, page: AboutPage.new),
     GetPage<dynamic>(name: kContactUsRouteName, page: ContactUsPage.new),
-    GetPage<dynamic>(
-      name: kPrivacyPolicyRouteName,
-      page: PrivacyPolicyPage.new,
-    ),
-    GetPage<dynamic>(name: kTermsOfServiceRouteName, page: TosPage.new),
     GetPage<dynamic>(name: kSplashPage, page: SplashPage.new),
+    GetPage<dynamic>(name: kAddPlantPageRoutename, page: AddPlantPage.new),
+    GetPage<dynamic>(name: kAdminDashboardRouteName, page: AdminDashboard.new),
   ];
 }
