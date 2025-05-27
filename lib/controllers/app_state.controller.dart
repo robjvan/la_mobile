@@ -9,6 +9,11 @@ class AppStateController {
 
   static RxBool viewAsList = false.obs;
 
+  static RxBool saveUsername = false.obs;
+
+  static void setLoadingState(final bool isLoading) =>
+      AppStateController.isLoading.value = isLoading;
+
   static void toggleDarkMode() {
     if (AppStateController.useDarkMode.value) {
       AppStateController.useDarkMode.value = false;
@@ -23,7 +28,6 @@ class AppStateController {
     } else {
       AppStateController.showFilterBar.value = true;
     }
-    print(AppStateController.showFilterBar.value);
   }
 
   static void toggleListView() {
@@ -32,6 +36,5 @@ class AppStateController {
     } else {
       AppStateController.viewAsList.value = true;
     }
-    print(AppStateController.viewAsList.value);
   }
 }
