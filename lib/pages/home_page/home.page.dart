@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
+import 'package:la_mobile/pages/home_page/widgets/la_speed_dial.dart';
 import 'package:la_mobile/pages/home_page/widgets/plant_grid_tile.dart';
-import 'package:la_mobile/pages/home_page/widgets/plant_ilst_tile.dart';
+import 'package:la_mobile/pages/home_page/widgets/plant_list_tile.dart';
 import 'package:la_mobile/utilities/theme.dart';
-import 'package:la_mobile/widgets/buttons/la_speed_dial.dart';
 import 'package:la_mobile/widgets/la_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,9 +24,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: LaSpeedDial(),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(kAppBarHeight),
-          child: LaAppbar(
-            title: 'dashboard'.tr, // TODO(RV): Add i18n strings
-          ),
+          child: LaAppbar(title: 'dashboard'.tr),
         ),
         backgroundColor:
             AppStateController.useDarkMode.value
