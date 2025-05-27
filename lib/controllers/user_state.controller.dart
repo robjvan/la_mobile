@@ -12,6 +12,9 @@ class UserStateController {
   static void setUserData(final UserModel user) =>
       UserStateController.user.value = user;
 
+  static void setUserPlants(final List<PlantModel> plants) =>
+      UserStateController.userPlants.value = plants;
+
   static void clearUser() {
     UserStateController.user.value = UserModel.initial();
   }
