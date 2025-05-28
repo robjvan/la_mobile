@@ -19,7 +19,7 @@ class MetricsService {
 
   static Future<void> fetchAdminMetrics() async {
     try {
-      AppStateController.isLoading.value = true;
+      AppStateController.setLoadingState(true);
 
       final http.Response response = await http.get(
         Uri.parse('${AppSecrets.serverUrl}/$kAdminEndpoint/metrics'),
@@ -32,7 +32,7 @@ class MetricsService {
         );
       }
 
-      AppStateController.isLoading.value = false;
+      AppStateController.setLoadingState(false);
     } on Exception catch (e) {
       print(e);
     }

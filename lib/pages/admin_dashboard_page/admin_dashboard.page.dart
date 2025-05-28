@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
@@ -15,20 +18,10 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
-  Future<void> populateMetrics() async {
-    setState(() {
-      AppStateController.isLoading.value = true;
-    });
-    await MetricsService.fetchAdminMetrics();
-    setState(() {
-      AppStateController.isLoading.value = false;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    populateMetrics();
+    MetricsService.fetchAdminMetrics();
   }
 
   Widget _buildLoadingPage() {
@@ -38,7 +31,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
         children: <Widget>[
           CircularProgressIndicator(),
           Text(
-            'Loading metrics'.tr,
+            'loading-metrics'.tr,
+            // 'yerp derp',
             style: TextStyle(
               color:
                   AppStateController.useDarkMode.value
@@ -361,6 +355,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
+  Future<void> onRefresh() async {
+    await MetricsService.fetchAdminMetrics();
+  }
+
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
@@ -378,16 +376,36 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            _buildUserMetricsRow(),
-                            _buildUserLoginMetricsRow(),
-                            _buildNewUserMetricsRow(),
-                            _buildUserGrowthMetricsRow(),
-                            _buildPlantMetricsRow(),
-                            _buildGeographicalMetricsRow(),
-                          ],
+                      child: CustomMaterialIndicator(
+                        onRefresh: onRefresh,
+                        backgroundColor: Colors.white,
+                        indicatorBuilder: (
+                          final BuildContext context,
+                          final IndicatorController controller,
+                        ) {
+                          return Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                              value:
+                                  AppStateController.isLoading.value
+                                      ? null
+                                      : math.min(controller.value, 1.0),
+                            ),
+                          );
+                        },
+                        child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          child: Column(
+                            children: <Widget>[
+                              _buildUserMetricsRow(),
+                              _buildUserLoginMetricsRow(),
+                              _buildNewUserMetricsRow(),
+                              _buildUserGrowthMetricsRow(),
+                              _buildPlantMetricsRow(),
+                              _buildGeographicalMetricsRow(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
