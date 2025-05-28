@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
@@ -13,29 +14,35 @@ class ForgotPasswordButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          TextButton(
-            onPressed: () {
-              print('forgot pass fired');
-              // TODO(RV): Add logic to start forgot password workflow
-            },
+          Obx(
+            () => TextButton(
+              onPressed:
+                  AppStateController.isLoading.value
+                      ? null
+                      : () => Get.toNamed(kForgotPasswordRouteName),
 
-            style: ButtonStyle(
-              shape: WidgetStatePropertyAll<OutlinedBorder>(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              style: ButtonStyle(
+                shape: WidgetStatePropertyAll<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                overlayColor: WidgetStatePropertyAll<Color>(
+                  AppColors.green.withAlpha(20),
+                ),
               ),
-              overlayColor: WidgetStatePropertyAll<Color>(
-                AppColors.green.withAlpha(20),
-              ),
-            ),
-            child: Obx(
-              () => Text(
-                'login.forgot-password'.tr,
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  color:
-                      AppStateController.useDarkMode.value
-                          ? AppColors.textColorDarkMode
-                          : AppColors.textColorLightMode,
+              child: Obx(
+                () => Text(
+                  'login.forgot-password'.tr,
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color:
+                        AppStateController.isLoading.value
+                            ? AppColors.lightGrey
+                            : AppStateController.useDarkMode.value
+                            ? AppColors.textColorDarkMode
+                            : AppColors.textColorLightMode,
+                  ),
                 ),
               ),
             ),

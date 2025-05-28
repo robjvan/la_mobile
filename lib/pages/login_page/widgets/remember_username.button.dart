@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/services/local_storage.service.dart';
@@ -38,29 +37,39 @@ class _RememberUsernameButtonState extends State<RememberUsernameButton> {
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color:
-                    AppStateController.useDarkMode.value
+                    AppStateController.isLoading.value
+                        ? AppColors.lightGrey
+                        : AppStateController.useDarkMode.value
                         ? AppColors.textColorDarkMode
                         : AppColors.textColorLightMode,
               ),
             ),
           ),
-          Checkbox(
-            value: rememberUsername,
-            onChanged: (final bool? value) {
-              setState(() {
-                rememberUsername = !rememberUsername;
-              });
-              if (value!) {
-                LocalStorageService.storeSaveUsernameSetting(true);
-              } else {
-                LocalStorageService.storeSaveUsernameSetting(false);
-              }
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+          Obx(
+            () => Checkbox(
+              value: rememberUsername,
+              onChanged:
+                  AppStateController.isLoading.value
+                      ? null
+                      : (final bool? value) {
+                        setState(() {
+                          rememberUsername = !rememberUsername;
+                        });
+                        if (value!) {
+                          LocalStorageService.storeSaveUsernameSetting(true);
+                        } else {
+                          LocalStorageService.storeSaveUsernameSetting(false);
+                        }
+                      },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              activeColor:
+                  AppStateController.isLoading.value
+                      ? AppColors.lightGrey
+                      : AppColors.green,
+              side: BorderSide(color: AppColors.grey),
             ),
-            activeColor: AppColors.green,
-            side: BorderSide(color: AppColors.grey),
           ),
         ],
       ),

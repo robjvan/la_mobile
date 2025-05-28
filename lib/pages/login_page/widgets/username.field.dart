@@ -11,10 +11,13 @@ class UsernameField extends StatelessWidget {
   Widget build(final BuildContext context) {
     return Obx(
       () => TextFormField(
+        enabled: !AppStateController.isLoading.value,
         controller: usernameController,
         style: TextStyle(
           color:
-              AppStateController.useDarkMode.value
+              AppStateController.isLoading.value
+                  ? AppColors.lightGrey
+                  : AppStateController.useDarkMode.value
                   ? AppColors.textColorDarkMode
                   : AppColors.textColorLightMode,
         ),

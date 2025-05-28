@@ -18,10 +18,13 @@ class _PasswordFieldState extends State<PasswordField> {
   Widget build(final BuildContext context) {
     return Obx(
       () => TextFormField(
+        enabled: !AppStateController.isLoading.value,
         controller: widget.passwordController,
         style: TextStyle(
           color:
-              AppStateController.useDarkMode.value
+              AppStateController.isLoading.value
+                  ? AppColors.lightGrey
+                  : AppStateController.useDarkMode.value
                   ? AppColors.textColorDarkMode
                   : AppColors.textColorLightMode,
         ),
@@ -33,6 +36,10 @@ class _PasswordFieldState extends State<PasswordField> {
             onTap: () => setState(() => passwordObscured = !passwordObscured),
             child: Icon(
               passwordObscured ? Icons.visibility_off : Icons.visibility,
+              color:
+                  AppStateController.isLoading.value
+                      ? AppColors.lightGrey
+                      : AppColors.grey,
             ),
           ),
           enabledBorder: OutlineInputBorder(
