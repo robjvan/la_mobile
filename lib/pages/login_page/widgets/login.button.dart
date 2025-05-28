@@ -29,6 +29,8 @@ class LoginButton extends StatelessWidget {
     return LaButton(
       action: () async {
         if (formKey.currentState!.validate()) {
+          AppStateController.setLoadingState(true);
+
           final dynamic response = await UsersService.login(
             usernameController.text,
             passwordController.text,
@@ -45,11 +47,13 @@ class LoginButton extends StatelessWidget {
               UserModel.fromMap(jsonDecode(response.body)),
             );
 
+            // AppStateController.isLoading.value = false;
+            // Navigate to dashboard
+            await Get.offAllNamed(kHomeRouteName);
+
             // Fetch user data - user, profile, plants, etc.
             await PlantsService.fetchUserPlants();
-
-            // Navigate to dashboard
-            unawaited(Get.offAllNamed(kHomeRouteName));
+            AppStateController.setLoadingState(false);
           } else {
             unawaited(Get.dialog(const BadCredentialsDialog()));
           }

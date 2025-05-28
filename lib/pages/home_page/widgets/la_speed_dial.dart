@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
+import 'package:la_mobile/services/metrics.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/dialogs/settings.dialog.dart';
 
@@ -99,8 +100,10 @@ class LaSpeedDial extends StatelessWidget {
             buildSpeedDialChild(
               Icon(Icons.admin_panel_settings_outlined, color: AppColors.green),
               'speed-dial.admin-dsahboard'.tr,
-              () {
-                Get.toNamed(kAdminDashboardRouteName);
+              () async {
+                AppStateController.setLoadingState(true);
+                await Get.toNamed(kAdminDashboardRouteName);
+                await MetricsService.fetchAdminMetrics();
               },
             ),
         ],
