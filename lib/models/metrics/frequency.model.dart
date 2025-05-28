@@ -1,7 +1,7 @@
 class FrequencyModel {
   final int minFrequency;
   final int maxFrequency;
-  final int avgFrequency;
+  final dynamic avgFrequency;
 
   FrequencyModel({
     required this.minFrequency,
