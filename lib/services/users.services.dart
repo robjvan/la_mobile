@@ -9,8 +9,24 @@ class UsersService {
   ) async {
     try {
       final http.Response response = await http.post(
-        Uri.parse('${AppSecrets.serverUrl}/$kLoginEndpoint'),
+        Uri.parse('${AppSecrets.serverUrl}/$kAuthEndpoint/login'),
         body: <String, String>{'username': username, 'password': password},
+      );
+
+      return response;
+    } on Exception catch (err) {
+      print(err);
+    }
+  }
+
+  static Future<dynamic> submitForgotPasswordRequest(
+    final String username,
+  ) async {
+    try {
+      final http.Response response = await http.post(
+        Uri.parse(
+          '${AppSecrets.serverUrl}/$kAuthEndpoint/forgot-password/$username}',
+        ),
       );
 
       return response;
