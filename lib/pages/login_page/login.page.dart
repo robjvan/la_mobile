@@ -6,6 +6,7 @@ import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/pages/login_page/login_page_widgets.dart';
 import 'package:la_mobile/services/local_storage.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
+import 'package:la_mobile/widgets/la_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,10 +16,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool passwordObscured = true;
-  bool rememberUsername = false;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  // bool _passwordObscured = true;
+  // bool _rememberUsername = false;
 
   // ignore: always_specify_types
   final _formKey = GlobalKey<FormState>();
@@ -30,41 +31,67 @@ class _LoginPageState extends State<LoginPage> {
 
     //! Used for testing, remove for prod
     // usernameController.text = 'dad@dad.com';
-    passwordController.text = 'Asdf123!';
+    _passwordController.text = 'Asdf123!';
     if (AppStateController.saveUsername.value) {
-      usernameController.text = UserStateController.username.value;
+      _usernameController.text = UserStateController.username.value;
     }
   }
 
   @override
   void dispose() {
-    usernameController.dispose();
-    passwordController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
     super.dispose();
+  }
+
+  Widget _buildLoadingWidget() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 32.0,
+          child: CircularProgressIndicator(color: AppColors.green),
+        ),
+        const SizedBox(height: 16.0),
+        Text(
+          'Logging in...'.tr, // TODO(RV): Add i18n strings
+          style: TextStyle(
+            fontSize: 18.0,
+            fontStyle: FontStyle.italic,
+            // fontWeight: FontWeight.bold,
+            color:
+                AppStateController.useDarkMode.value
+                    ? AppColors.textColorDarkMode
+                    : AppColors.textColorLightMode,
+          ),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(final BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        backgroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.bgColorDarkMode
-                : AppColors.bgColorLightMode,
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: Get.width,
-            height: Get.height,
-            child: Column(
+    return LaPage(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: Get.width,
+          height: Get.height,
+          child: Obx(
+            () => Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Spacer(),
-                Image.asset(kAppLogoPath, height: 250.0),
+                Hero(
+                  tag: 'app-logo',
+                  child: Image.asset(kAppLogoPath, height: 250.0),
+                ),
                 Text(
                   'app_title'.tr,
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: AppColors.green,
+                    color:
+                        AppStateController.isLoading.value
+                            ? AppColors.lightGrey
+                            : AppColors.green,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -77,21 +104,23 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        UsernameField(usernameController: usernameController),
+                        UsernameField(usernameController: _usernameController),
                         const RememberUsernameButton(),
                         const SizedBox(height: 8.0),
-                        PasswordField(passwordController: passwordController),
+                        PasswordField(passwordController: _passwordController),
                         const ForgotPasswordButton(),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 24.0),
-                LoginButton(
-                  formKey: _formKey,
-                  usernameController: usernameController,
-                  passwordController: passwordController,
-                ),
+                AppStateController.isLoading.value
+                    ? _buildLoadingWidget()
+                    : LoginButton(
+                      formKey: _formKey,
+                      usernameController: _usernameController,
+                      passwordController: _passwordController,
+                    ),
                 const Spacer(),
                 const NewUserButton(),
                 const SizedBox(height: 16.0),
