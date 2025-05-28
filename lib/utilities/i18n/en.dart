@@ -13,6 +13,7 @@ final Map<String, String> englishStrings = <String, String>{
   'choose-date': 'Choose date',
   'tags': 'Tags',
   'close': 'Close',
+  'sign-up': 'Sign Up',
 
   // Speed dial string
   'speed-dial.add-new-plant': 'Add new plant',
@@ -33,6 +34,9 @@ final Map<String, String> englishStrings = <String, String>{
 
   //
   'favorites': 'Favorites',
+
+  //
+  'forgot-password': 'Forgot Password',
 
   // Login page strings
   'login': 'Login',
@@ -95,6 +99,7 @@ final Map<String, String> englishStrings = <String, String>{
       'Could not connect to the LeafAlert server, please try again later.',
 
   // Metrics strings
+  'loading-metrics': 'Loading metrics...',
   'user-metrics': 'Users',
   'total-users': 'Total Users',
   'active-users': 'Active Users',
@@ -119,12 +124,12 @@ final Map<String, String> englishStrings = <String, String>{
   'live-plants': 'Total Live Plants',
   'toBeWateredToday': 'Plants To Be Watered Today',
   'mostWateredSpecies': 'Most Watered Species',
-  'wateringFrequency-min': 'Min Watering Frequency',
-  'wateringFrequency-avg': 'Avg Watering Frequency',
-  'wateringFrequency-max': 'Max Watering Frequency',
-  'fertilizingFrequency-min': 'Min Fertilizing Frequency',
-  'fertilizingFrequency-avg': 'Avg Fertilizing Frequency',
-  'fertilizingFrequency-max': 'Max Fertilizing Frequency',
+  'wateringFrequency-min': 'Min Watering Freq. (days)',
+  'wateringFrequency-avg': 'Avg Watering Freq. (days)',
+  'wateringFrequency-max': 'Max Watering Freq. (days)',
+  'fertilizingFrequency-min': 'Min Fertilizing Freq. (days)',
+  'fertilizingFrequency-avg': 'Avg Fertilizing Freq. (days)',
+  'fertilizingFrequency-max': 'Max Fertilizing Freq. (days)',
   'mostFertilizedSpecies': 'Most Fertilized Species',
   'plantsAddedToday': 'Plants Added Today',
   'plantsAdded7Days': 'Plants Added Past 7 Days',
