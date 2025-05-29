@@ -23,8 +23,9 @@ const String kContactUsRouteName = '/contact-us';
 const String kPrivacyPolicyRouteName = '/privacy-policy';
 const String kTermsOfServiceRouteName = '/terms-of-service';
 const String kAddPlantPageRoutename = '/add-plant';
-const String kSplashPage = '/splash';
+const String kSplashRouteName = '/splash';
 const String kAdminDashboardRouteName = '/admin';
+const String kSettingsRouteName = '/settings';
 
 // const String kLoginEndpoint = 'auth/login';
 // const String kRegisterEndpoint = 'auth/register';
