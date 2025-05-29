@@ -11,6 +11,8 @@ class AppStateController {
 
   static RxBool saveUsername = false.obs;
 
+  static RxBool enableNotifications = false.obs;
+
   static void setLoadingState(final bool isLoading) =>
       AppStateController.isLoading.value = isLoading;
 
@@ -19,6 +21,14 @@ class AppStateController {
       AppStateController.useDarkMode.value = false;
     } else {
       AppStateController.useDarkMode.value = true;
+    }
+  }
+
+  static void toggleNotifications() {
+    if (AppStateController.enableNotifications.value) {
+      AppStateController.enableNotifications.value = false;
+    } else {
+      AppStateController.enableNotifications.value = true;
     }
   }
 
