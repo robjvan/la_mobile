@@ -22,13 +22,7 @@ class LaTextInputField extends StatelessWidget {
       children: <Widget>[
         Text(
           label,
-          style: TextStyle(
-            fontSize: 24.0,
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(fontSize: 24.0, color: AppTheme.textColor()),
         ),
         TextFormField(
           controller: controller,
@@ -37,12 +31,7 @@ class LaTextInputField extends StatelessWidget {
               (final String? val) {
                 return null;
               },
-          style: TextStyle(
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(color: AppTheme.textColor()),
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.0),

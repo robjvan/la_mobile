@@ -23,12 +23,7 @@ class LaDatePicker extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            color:
-                condition
-                    ? AppStateController.useDarkMode.value
-                        ? AppColors.textColorDarkMode
-                        : AppColors.textColorLightMode
-                    : AppColors.lightGrey,
+            color: condition ? AppTheme.textColor() : AppColors.lightGrey,
             fontStyle: condition ? FontStyle.normal : FontStyle.italic,
           ),
         ),

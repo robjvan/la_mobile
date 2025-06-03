@@ -30,10 +30,7 @@ class MetricsCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.bold,
-                color:
-                    AppStateController.useDarkMode.value
-                        ? AppColors.textColorDarkMode
-                        : AppColors.textColorLightMode,
+                color: AppTheme.textColor(),
               ),
               textAlign: TextAlign.center,
             ),

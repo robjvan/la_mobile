@@ -28,12 +28,7 @@ class LaTagPill extends StatelessWidget {
             Text(
               tag,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color:
-                    AppStateController.useDarkMode.value
-                        ? AppColors.textColorDarkMode
-                        : AppColors.textColorLightMode,
-              ),
+              style: TextStyle(color: AppTheme.textColor()),
             ),
             const SizedBox(width: 8.0),
             GestureDetector(

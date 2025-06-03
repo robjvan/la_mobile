@@ -35,12 +35,7 @@ class PlantListTile extends StatelessWidget {
               : Image.asset('assets/images/image_placeholder.png'),
       title: Text(
         plant.name ?? '',
-        style: TextStyle(
-          color:
-              AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
-        ),
+        style: TextStyle(color: AppTheme.textColor()),
       ),
       subtitle: Text(
         plant.lastWateredAt != null

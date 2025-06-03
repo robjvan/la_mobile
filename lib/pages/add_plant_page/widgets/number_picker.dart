@@ -25,12 +25,7 @@ class LaNumberPicker extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            color:
-                condition
-                    ? AppStateController.useDarkMode.value
-                        ? AppColors.textColorDarkMode
-                        : AppColors.textColorLightMode
-                    : AppColors.lightGrey,
+            color: condition ? AppTheme.textColor() : AppColors.lightGrey,
             fontStyle: condition ? FontStyle.normal : FontStyle.italic,
           ),
         ),
@@ -46,9 +41,7 @@ class LaNumberPicker extends StatelessWidget {
                 fontSize: 24.0,
                 color:
                     condition
-                        ? AppStateController.useDarkMode.value
-                            ? AppColors.textColorDarkMode
-                            : AppColors.textColorLightMode
+                        ? AppTheme.textColor()
                         : AppStateController.useDarkMode.value
                         ? AppColors.grey
                         : AppColors.lightGrey,
@@ -66,9 +59,7 @@ class LaNumberPicker extends StatelessWidget {
                 fontSize: 18.0,
                 color:
                     condition
-                        ? AppStateController.useDarkMode.value
-                            ? AppColors.textColorDarkMode
-                            : AppColors.textColorLightMode
+                        ? AppTheme.textColor()
                         : AppStateController.useDarkMode.value
                         ? AppColors.grey
                         : AppColors.lightGrey,
@@ -88,9 +79,7 @@ class LaNumberPicker extends StatelessWidget {
                 fontSize: 16.0,
                 color:
                     condition
-                        ? AppStateController.useDarkMode.value
-                            ? AppColors.textColorDarkMode
-                            : AppColors.textColorLightMode
+                        ? AppTheme.textColor()
                         : AppStateController.useDarkMode.value
                         ? AppColors.grey
                         : AppColors.lightGrey,

@@ -16,22 +16,11 @@ class NotesField extends StatelessWidget {
       children: <Widget>[
         Text(
           'notes'.tr,
-          style: TextStyle(
-            fontSize: 24.0,
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(fontSize: 24.0, color: AppTheme.textColor()),
         ),
         TextFormField(
           controller: controller,
-          style: TextStyle(
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(color: AppTheme.textColor()),
           validator: (final dynamic val) => null,
           decoration: InputDecoration(
             border: OutlineInputBorder(

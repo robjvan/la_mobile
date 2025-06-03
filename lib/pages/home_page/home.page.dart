@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
-import 'package:la_mobile/pages/home_page/widgets/la_speed_dial.dart';
 import 'package:la_mobile/pages/home_page/widgets/plant_grid_tile.dart';
 import 'package:la_mobile/pages/home_page/widgets/plant_list_tile.dart';
 import 'package:la_mobile/services/plants.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/la_appbar.dart';
+import 'package:la_mobile/widgets/la_speed_dial.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,10 +35,7 @@ class _HomePageState extends State<HomePage> {
           preferredSize: Size.fromHeight(kAppBarHeight),
           child: LaAppbar(title: 'dashboard'.tr),
         ),
-        backgroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.bgColorDarkMode
-                : AppColors.bgColorLightMode,
+        backgroundColor: AppTheme.backgroundColor(),
         body: SizedBox(
           width: Get.width,
           height: Get.height,
@@ -52,10 +49,7 @@ class _HomePageState extends State<HomePage> {
                     'Hello ${UserStateController.user.value.username}', // TODO(RV): Add i18n strings
                     style: TextStyle(
                       fontSize: 24.0,
-                      color:
-                          AppStateController.useDarkMode.value
-                              ? AppColors.textColorDarkMode
-                              : AppColors.textColorLightMode,
+                      color: AppTheme.textColor(),
                     ),
                   ),
                 ),
@@ -79,10 +73,7 @@ class _HomePageState extends State<HomePage> {
                                   style: TextStyle(
                                     fontSize: 18.0,
                                     fontStyle: FontStyle.italic,
-                                    color:
-                                        AppStateController.useDarkMode.value
-                                            ? AppColors.textColorDarkMode
-                                            : AppColors.textColorLightMode,
+                                    color: AppTheme.textColor(),
                                   ),
                                 ),
                               ],

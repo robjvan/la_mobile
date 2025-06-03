@@ -16,21 +16,11 @@ class BadCredentialsDialog extends StatelessWidget {
               : AppColors.bgColorLightMode,
       title: Text(
         'Bad creds bro',
-        style: TextStyle(
-          color:
-              AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
-        ),
+        style: TextStyle(color: AppTheme.textColor()),
       ),
       content: Text(
         "Nuh uh uh you didn't say the magic word",
-        style: TextStyle(
-          color:
-              AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
-        ),
+        style: TextStyle(color: AppTheme.textColor()),
       ),
       actions: <Widget>[LaButton(action: Get.back, label: 'Ok')],
     );

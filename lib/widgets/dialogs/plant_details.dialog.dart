@@ -19,31 +19,13 @@ class PlantDetailsDialog extends StatelessWidget {
         title: Text(
           plant.name ?? '',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(color: AppTheme.textColor()),
         ),
         children: <Widget>[
-          Text(
-            'blah blah'.tr,
-            style: TextStyle(
-              color:
-                  AppStateController.useDarkMode.value
-                      ? AppColors.textColorDarkMode
-                      : AppColors.textColorLightMode,
-            ),
-          ),
+          Text('blah blah'.tr, style: TextStyle(color: AppTheme.textColor())),
           Text(
             'blah blah blah'.tr,
-            style: TextStyle(
-              color:
-                  AppStateController.useDarkMode.value
-                      ? AppColors.textColorDarkMode
-                      : AppColors.textColorLightMode,
-            ),
+            style: TextStyle(color: AppTheme.textColor()),
           ),
         ],
       ),

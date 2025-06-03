@@ -22,10 +22,7 @@ class _LaAppbarState extends State<LaAppbar> {
             AppStateController.useDarkMode.value
                 ? AppColors.bgColorDarkMode
                 : AppColors.bgColorLightMode,
-        foregroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.textColorDarkMode
-                : AppColors.textColorLightMode,
+        foregroundColor: AppTheme.textColor(),
         leading: Image.asset('assets/logo/logo.png'),
         title: Text(widget.title),
         actions: <Widget>[

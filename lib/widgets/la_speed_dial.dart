@@ -18,10 +18,7 @@ class LaSpeedDial extends StatelessWidget {
       final Function() action,
     ) {
       return SpeedDialChild(
-        foregroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.textColorDarkMode
-                : AppColors.textColorLightMode,
+        foregroundColor: AppTheme.textColor(),
         backgroundColor:
             AppStateController.useDarkMode.value
                 ? const Color.fromARGB(255, 40, 40, 40)
@@ -33,12 +30,7 @@ class LaSpeedDial extends StatelessWidget {
             AppStateController.useDarkMode.value
                 ? const Color.fromARGB(255, 40, 40, 40)
                 : AppColors.bgColorLightMode,
-        labelStyle: TextStyle(
-          color:
-              AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
-        ),
+        labelStyle: TextStyle(color: AppTheme.textColor()),
       );
     }
 
@@ -48,10 +40,7 @@ class LaSpeedDial extends StatelessWidget {
         activeIcon: Icons.close,
         spacing: 8.0,
         // label: Text('Menu'),
-        foregroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.textColorDarkMode
-                : AppColors.textColorLightMode,
+        foregroundColor: AppTheme.textColor(),
         backgroundColor:
             AppStateController.useDarkMode.value
                 ? const Color.fromARGB(255, 40, 40, 40)

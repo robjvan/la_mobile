@@ -42,13 +42,7 @@ class SettingsPage extends StatelessWidget {
             Obx(
               () => Text(
                 'Use dark mode'.tr,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color:
-                      AppStateController.useDarkMode.value
-                          ? AppColors.textColorDarkMode
-                          : AppColors.textColorLightMode,
-                ),
+                style: TextStyle(fontSize: 16.0, color: AppTheme.textColor()),
               ),
             ),
             Spacer(),
@@ -122,13 +116,7 @@ class SettingsPage extends StatelessWidget {
               Obx(
                 () => Text(
                   'Enable notifications'.tr,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color:
-                        AppStateController.useDarkMode.value
-                            ? AppColors.textColorDarkMode
-                            : AppColors.textColorLightMode,
-                  ),
+                  style: TextStyle(fontSize: 16.0, color: AppTheme.textColor()),
                 ),
               ),
               Spacer(),

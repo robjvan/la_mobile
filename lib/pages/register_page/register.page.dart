@@ -46,12 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
             children: <Widget>[
               Text(
                 'Receive newsletter?',
-                style: TextStyle(
-                  color:
-                      AppStateController.useDarkMode.value
-                          ? AppColors.textColorDarkMode
-                          : AppColors.textColorLightMode,
-                ),
+                style: TextStyle(color: AppTheme.textColor()),
               ),
               Checkbox(
                 shape: RoundedRectangleBorder(

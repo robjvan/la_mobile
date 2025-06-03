@@ -157,6 +157,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             // Image upload box
             ImageBox(
               onTap: () {
+                // TODO(RV): Add logic
                 // 1. open camera to capture photo
                 // 2. store locally until record is saved
                 setState(() {
@@ -185,7 +186,9 @@ class _AddPlantPageState extends State<AddPlantPage> {
             LaTextInputField(
               label: 'species'.tr,
               controller: _speciesController,
-              hintText: 'e.g. "Chlorophytum comosum" or "African Lily"'.tr,
+              hintText:
+                  'e.g. "Chlorophytum comosum" or "African Lily"'
+                      .tr, // TODO(RV): Add i18n strings
             ),
             const SizedBox(height: 16.0),
 
@@ -301,7 +304,9 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
             // "Last fertilized" date picker, optional
             LaDatePicker(
-              label: 'Last fertilized (optional):'.tr,
+              label:
+                  'Last fertilized (optional):'
+                      .tr, // TODO(RV): Add i18n strings
               variable: _lastFertilizedAt,
               condition: _fertilizerReminderEnabled,
               onPressed: () async {
@@ -359,17 +364,11 @@ class _AddPlantPageState extends State<AddPlantPage> {
   Widget build(final BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.bgColorDarkMode
-                : AppColors.bgColorLightMode,
+        backgroundColor: AppTheme.backgroundColor(),
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              backgroundColor:
-                  AppStateController.useDarkMode.value
-                      ? AppColors.bgColorDarkMode
-                      : AppColors.bgColorLightMode,
+              backgroundColor: AppTheme.backgroundColor(),
               title: Text(
                 'add-plant'.tr,
                 style: TextStyle(fontSize: 40.0, color: AppColors.green),

@@ -33,12 +33,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           Text(
             'loading-metrics'.tr,
             // 'yerp derp',
-            style: TextStyle(
-              color:
-                  AppStateController.useDarkMode.value
-                      ? AppColors.textColorDarkMode
-                      : AppColors.textColorLightMode,
-            ),
+            style: TextStyle(color: AppTheme.textColor()),
           ),
         ],
       ),

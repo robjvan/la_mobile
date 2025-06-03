@@ -29,12 +29,7 @@ class _TagsFieldState extends State<TagsField> {
       children: <Widget>[
         Text('tags'.tr, style: TextStyle(fontSize: 24.0)),
         TextFormField(
-          style: TextStyle(
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(color: AppTheme.textColor()),
           controller: widget.controller,
           validator: (final dynamic val) => null,
           decoration: InputDecoration(
@@ -48,13 +43,7 @@ class _TagsFieldState extends State<TagsField> {
               borderRadius: BorderRadius.circular(16.0),
             ),
             suffixIcon: IconButton(
-              icon: Icon(
-                Icons.add,
-                color:
-                    AppStateController.useDarkMode.value
-                        ? AppColors.textColorDarkMode
-                        : AppColors.textColorLightMode,
-              ),
+              icon: Icon(Icons.add, color: AppTheme.textColor()),
               onPressed: widget.onPressed,
             ),
           ),

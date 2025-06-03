@@ -58,10 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             fontSize: 18.0,
             fontStyle: FontStyle.italic,
             // fontWeight: FontWeight.bold,
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
+            color: AppTheme.textColor(),
           ),
         ),
       ],

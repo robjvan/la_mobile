@@ -15,24 +15,8 @@ class ErrorDialog extends StatelessWidget {
           AppStateController.useDarkMode.value
               ? AppColors.bgColorDarkMode
               : AppColors.bgColorLightMode,
-      title: Text(
-        'error'.tr,
-        style: TextStyle(
-          color:
-              AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
-        ),
-      ),
-      content: Text(
-        content,
-        style: TextStyle(
-          color:
-              AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
-        ),
-      ),
+      title: Text('error'.tr, style: TextStyle(color: AppTheme.textColor())),
+      content: Text(content, style: TextStyle(color: AppTheme.textColor())),
       actions: <Widget>[LaButton(label: 'ok'.tr, action: Get.back)],
     );
   }
