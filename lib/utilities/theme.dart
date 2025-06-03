@@ -11,20 +11,22 @@ class AppTheme {
     primaryColorDark: Colors.lightGreen,
   );
 
-  static Color backgroundColor =
-      AppStateController.useDarkMode.value
-          ? AppColors.bgColorDarkMode
-          : AppColors.bgColorLightMode;
+  static Color backgroundColor() {
+    return AppStateController.useDarkMode.value
+        ? AppColors.bgColorDarkMode
+        : AppColors.bgColorLightMode;
+  }
 
   static Color accentColor =
       AppStateController.useDarkMode.value
           ? AppColors.green
           : AppColors.limeGreen;
 
-  static Color textColor =
-      AppStateController.useDarkMode.value
-          ? AppColors.textColorDarkMode
-          : AppColors.textColorLightMode;
+  static Color textColor() {
+    return AppStateController.useDarkMode.value
+        ? AppColors.textColorDarkMode
+        : AppColors.textColorLightMode;
+  }
 
   static Color secondaryTextColor =
       AppStateController.useDarkMode.value
