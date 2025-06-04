@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LaTagPill extends StatelessWidget {
   final String tag;
   final Function() onDelete;
-  const LaTagPill({required this.tag, required this.onDelete, super.key});
+  final bool small;
+  const LaTagPill({
+    required this.tag,
+    required this.onDelete,
+    this.small = true,
+    super.key,
+  });
 
   @override
   Widget build(final BuildContext context) {
@@ -28,12 +33,13 @@ class LaTagPill extends StatelessWidget {
             Text(
               tag,
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppTheme.textColor()),
+              style: const TextStyle(color: AppColors.white),
             ),
             const SizedBox(width: 8.0),
+            if (!small) Spacer(),
             GestureDetector(
               onTap: onDelete,
-              child: Icon(
+              child: const Icon(
                 Icons.cancel_rounded,
                 color: AppColors.bgColorLightMode,
               ),
