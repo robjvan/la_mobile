@@ -54,6 +54,7 @@ class _NotesFieldState extends State<NotesField> {
           SizedBox(
             width: Get.width,
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: widget.notes.length,
               padding: const EdgeInsets.only(top: 8),
