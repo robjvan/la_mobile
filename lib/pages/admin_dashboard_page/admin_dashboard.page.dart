@@ -357,10 +357,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          AppStateController.useDarkMode.value
-              ? AppColors.bgColorDarkMode
-              : AppColors.bgColorLightMode,
+      backgroundColor: AppTheme.backgroundColor(),
       body: Obx(
         () =>
             AppStateController.isLoading.value

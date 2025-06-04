@@ -12,10 +12,7 @@ class PlantDetailsDialog extends StatelessWidget {
   Widget build(final BuildContext context) {
     return Obx(
       () => SimpleDialog(
-        backgroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.bgColorDarkMode
-                : AppColors.bgColorLightMode,
+        backgroundColor: AppTheme.backgroundColor(),
         title: Text(
           plant.name ?? '',
           textAlign: TextAlign.center,

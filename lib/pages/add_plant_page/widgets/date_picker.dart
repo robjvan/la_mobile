@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LaDatePicker extends StatelessWidget {
@@ -39,7 +38,7 @@ class LaDatePicker extends StatelessWidget {
               condition ? AppColors.darkGrey : AppColors.grey.withAlpha(160),
             ),
           ),
-          onPressed: condition ? () => onPressed() : null,
+          onPressed: condition ? onPressed : null,
           child: Text(
             variable != null
                 ? variable.toString().split(' ')[0]

@@ -10,10 +10,7 @@ class BadCredentialsDialog extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return AlertDialog(
-      backgroundColor:
-          AppStateController.useDarkMode.value
-              ? AppColors.bgColorDarkMode
-              : AppColors.bgColorLightMode,
+      backgroundColor: AppTheme.backgroundColor(),
       title: Text(
         'Bad creds bro',
         style: TextStyle(color: AppTheme.textColor()),

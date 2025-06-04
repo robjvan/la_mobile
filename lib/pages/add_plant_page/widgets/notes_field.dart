@@ -20,6 +20,57 @@ class NotesField extends StatefulWidget {
 }
 
 class _NotesFieldState extends State<NotesField> {
+  Widget _buildInputField() {
+    return TextFormField(
+      onFieldSubmitted: (final _) => widget.onPressed(),
+      controller: widget.controller,
+      style: TextStyle(color: AppTheme.textColor()),
+      validator: (final dynamic val) => null,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
+        hintText: 'new-plant.notes-hint'.tr,
+        hintStyle: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.green, width: 2),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.add, color: AppTheme.textColor()),
+          onPressed: widget.onPressed,
+        ),
+      ),
+      autovalidateMode: AutovalidateMode.onUnfocus,
+    );
+  }
+
+  Widget _buildNotesList() {
+    return SizedBox(
+      width: Get.width,
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: widget.notes.length,
+        padding: const EdgeInsets.only(top: 8),
+        itemBuilder: (final BuildContext context, final int i) {
+          return Column(
+            children: <Widget>[
+              if (i != 0) const SizedBox(height: 4.0),
+              LaTagPill(
+                tag: widget.notes[i],
+                onDelete: () {
+                  setState(() {
+                    widget.notes.removeAt(i);
+                  });
+                },
+                small: false,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(final BuildContext context) {
     return Column(
@@ -28,54 +79,8 @@ class _NotesFieldState extends State<NotesField> {
           'notes'.tr,
           style: TextStyle(fontSize: 24.0, color: AppTheme.textColor()),
         ),
-        TextFormField(
-          onFieldSubmitted: (final _) => widget.onPressed(),
-          controller: widget.controller,
-          style: TextStyle(color: AppTheme.textColor()),
-          validator: (final dynamic val) => null,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            hintText: 'new-plant.notes-hint'.tr,
-            hintStyle: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.green, width: 2),
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.add, color: AppTheme.textColor()),
-              onPressed: widget.onPressed,
-            ),
-          ),
-          autovalidateMode: AutovalidateMode.onUnfocus,
-        ),
-        if (widget.notes.isNotEmpty)
-          SizedBox(
-            width: Get.width,
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: widget.notes.length,
-              padding: const EdgeInsets.only(top: 8),
-              itemBuilder: (final BuildContext context, final int i) {
-                return Column(
-                  children: [
-                    if (i != 0) const SizedBox(height: 4.0),
-                    LaTagPill(
-                      tag: widget.notes[i],
-                      onDelete: () {
-                        setState(() {
-                          widget.notes.removeAt(i);
-                        });
-                      },
-                      small: false,
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
+        _buildInputField(),
+        if (widget.notes.isNotEmpty) _buildNotesList(),
         const SizedBox(height: 8.0),
       ],
     );

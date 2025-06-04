@@ -76,13 +76,7 @@ class SettingsPage extends StatelessWidget {
           children: <Widget>[
             Text(
               'Use biometrics to login'.tr,
-              style: TextStyle(
-                color: AppColors.grey,
-                fontSize: 16.0,
-                // AppStateController.useDarkMode.value
-                //     ? AppColors.textColorDarkMode
-                //     : AppColors.textColorLightMode,
-              ),
+              style: TextStyle(color: AppColors.grey, fontSize: 16.0),
             ),
             Spacer(),
             Checkbox(

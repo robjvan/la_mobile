@@ -18,6 +18,72 @@ class LaNumberPicker extends StatelessWidget {
     super.key,
   });
 
+  Widget _buildDecrementButton() {
+    return SizedBox(
+      width: 32.0,
+      child: MaterialButton(
+        padding: EdgeInsets.zero,
+        onPressed: condition ? onDecrementPressed : null,
+        child: Text(
+          '-',
+          style: TextStyle(
+            fontSize: 24.0,
+            color:
+                condition
+                    ? AppTheme.textColor()
+                    : AppStateController.useDarkMode.value
+                    ? AppColors.grey
+                    : AppColors.lightGrey,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildValueBox() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: SizedBox(
+        width: 24.0,
+        child: Text(
+          controller.text,
+          style: TextStyle(
+            fontSize: 18.0,
+            color:
+                condition
+                    ? AppTheme.textColor()
+                    : AppStateController.useDarkMode.value
+                    ? AppColors.grey
+                    : AppColors.lightGrey,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIncrementButton() {
+    return SizedBox(
+      width: 32.0,
+      child: MaterialButton(
+        padding: EdgeInsets.zero,
+        onPressed: condition ? onIncrementPressed : null,
+        child: Text(
+          '+',
+          style: TextStyle(
+            fontSize: 16.0,
+            color:
+                condition
+                    ? AppTheme.textColor()
+                    : AppStateController.useDarkMode.value
+                    ? AppColors.grey
+                    : AppColors.lightGrey,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(final BuildContext context) {
     return Row(
@@ -30,63 +96,9 @@ class LaNumberPicker extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        SizedBox(
-          width: 32.0,
-          child: MaterialButton(
-            padding: EdgeInsets.zero,
-            onPressed: condition ? onDecrementPressed : null,
-            child: Text(
-              '-',
-              style: TextStyle(
-                fontSize: 24.0,
-                color:
-                    condition
-                        ? AppTheme.textColor()
-                        : AppStateController.useDarkMode.value
-                        ? AppColors.grey
-                        : AppColors.lightGrey,
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: SizedBox(
-            width: 24.0,
-            child: Text(
-              controller.text,
-              style: TextStyle(
-                fontSize: 18.0,
-                color:
-                    condition
-                        ? AppTheme.textColor()
-                        : AppStateController.useDarkMode.value
-                        ? AppColors.grey
-                        : AppColors.lightGrey,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 32.0,
-          child: MaterialButton(
-            padding: EdgeInsets.zero,
-            onPressed: condition ? onIncrementPressed : null,
-            child: Text(
-              '+',
-              style: TextStyle(
-                fontSize: 16.0,
-                color:
-                    condition
-                        ? AppTheme.textColor()
-                        : AppStateController.useDarkMode.value
-                        ? AppColors.grey
-                        : AppColors.lightGrey,
-              ),
-            ),
-          ),
-        ),
+        _buildDecrementButton(),
+        _buildValueBox(),
+        _buildIncrementButton(),
         const SizedBox(width: 10.0),
       ],
     );

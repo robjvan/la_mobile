@@ -12,10 +12,7 @@ class LaPage extends StatelessWidget {
   Widget build(final BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.bgColorDarkMode
-                : AppColors.bgColorLightMode,
+        backgroundColor: AppTheme.backgroundColor(),
         body: SizedBox(height: Get.height, width: Get.width, child: body),
       ),
     );
