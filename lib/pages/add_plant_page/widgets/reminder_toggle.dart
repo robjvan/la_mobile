@@ -22,7 +22,11 @@ class LaReminderToggle extends StatelessWidget {
           style: TextStyle(color: AppTheme.textColor(), fontSize: 18.0),
           overflow: TextOverflow.ellipsis,
         ),
-        Checkbox(value: condition, onChanged: onChanged),
+        Checkbox(
+          value: condition,
+          onChanged: onChanged,
+          activeColor: AppColors.green.withAlpha(160),
+        ),
       ],
     );
   }

@@ -23,7 +23,8 @@ class LaPreferenceToggle extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         ToggleSwitch(
-          initialLabelIndex: 1,
+          activeBgColor: <Color>[AppColors.green.withAlpha(140)],
+          inactiveBgColor: AppColors.lightGrey,
           totalSwitches: 3,
           labels: <String>['low'.tr, 'medium'.tr, 'high'.tr],
           onToggle: onToggle,

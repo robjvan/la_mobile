@@ -19,7 +19,7 @@ class LaTagPill extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: AppColors.green.withAlpha(80),
+          color: AppColors.green.withAlpha(160),
           shape: BoxShape.rectangle,
         ),
         padding: const EdgeInsets.only(

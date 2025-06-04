@@ -29,6 +29,16 @@ class LaDatePicker extends StatelessWidget {
         ),
         const Spacer(),
         ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(
+              condition
+                  ? AppColors.lightGrey
+                  : AppColors.lightGrey.withAlpha(150),
+            ),
+            foregroundColor: WidgetStatePropertyAll<Color>(
+              condition ? AppColors.darkGrey : AppColors.grey.withAlpha(160),
+            ),
+          ),
           onPressed: condition ? () => onPressed() : null,
           child: Text(
             variable != null
