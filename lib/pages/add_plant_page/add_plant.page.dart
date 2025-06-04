@@ -1,11 +1,14 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/cancel_button.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/date_picker.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/image_box.dart';
+import 'package:la_mobile/pages/add_plant_page/widgets/la_preference_toggle.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/notes_field.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/number_picker.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/reminder_toggle.dart';
@@ -104,7 +107,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             imageUrls:
                 _imageUrl != null
                     ? <String?>[_imageUrl]
-                    : [], // Implement image Url
+                    : <void>[], // Implement image Url
             archived: false,
             wateringReminderEnabled: _wateringReminderEnabled,
             waterIntervalDays:
@@ -123,11 +126,15 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 _fertilizerReminderEnabled
                     ? _lastFertilizedAt.toString()
                     : null,
-            humidityPreference: _humidityPreference.toString(),
+            humidityPreference: EnumToString.convertToString(
+              _humidityPreference,
+            ),
             location: _locationController.text,
             notes: _notes,
             soilType: _soilTypeController.text,
-            sunlightPreference: _sunlightPreference.toString(),
+            sunlightPreference: EnumToString.convertToString(
+              _sunlightPreference,
+            ),
             tags: _tags,
             userId: UserStateController.user.value.userId!,
           ),
@@ -170,7 +177,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
             // Name field
             LaTextInputField(
-              label: 'name'.tr,
+              label: 'name'.tr, // TODO(RV): Add i18n strings
               controller: _nameController,
               hintText: 'new-plant.name-hint'.tr,
               validator: (final dynamic val) {
@@ -184,7 +191,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
             // Species field
             LaTextInputField(
-              label: 'species'.tr,
+              label: 'species'.tr, // TODO(RV): Add i18n strings
               controller: _speciesController,
               hintText:
                   'e.g. "Chlorophytum comosum" or "African Lily"'
@@ -194,7 +201,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
             // Location field
             LaTextInputField(
-              label: 'location'.tr,
+              label: 'location'.tr, // TODO(RV): Add i18n strings
               controller: _locationController,
               hintText: 'new-plant.location-hint'.tr,
             ),
@@ -259,7 +266,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
               },
             ),
 
-            // TODO(RV): Add waterAmount field
+            // TODO(RV): Add waterAmount field?
             const SizedBox(height: 16.0),
 
             // Fertilizer reminder checkbox
@@ -317,7 +324,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
                   ),
                 );
 
-                print('Date: $date');
+                // print('Date: $date');
                 if (date != null) {
                   setState(() {
                     _lastFertilizedAt = date;
@@ -325,22 +332,68 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 }
               },
             ),
+            const SizedBox(height: 16.0),
+
             // TODO(RV): Add fertilizerAmount field?
 
-            // TODO(RV): Add humidity preference 3-way picker
+            // Humidity preference 3-way switch
+            LaPreferenceToggle(
+              onToggle: (final int? index) {
+                switch (index) {
+                  case 0:
+                    _humidityPreference = PreferenceEnum.low;
+                    break;
+                  case 1:
+                    _humidityPreference = PreferenceEnum.medium;
+                    break;
+                  case 2:
+                    _humidityPreference = PreferenceEnum.high;
+                    break;
+                }
+              },
+              label: 'Humidity Preference'.tr, // TODO(RV): Add i18n strings
+            ),
+            const SizedBox(height: 16.0),
 
-            // TODO(RV): Add sunlight preference 3-way picker
+            // Sunlight preference 3-way switch
+            LaPreferenceToggle(
+              onToggle: (final int? index) {
+                switch (index) {
+                  case 0:
+                    _sunlightPreference = PreferenceEnum.low;
+                    break;
+                  case 1:
+                    _sunlightPreference = PreferenceEnum.medium;
+                    break;
+                  case 2:
+                    _sunlightPreference = PreferenceEnum.high;
+                    break;
+                }
+              },
+              label: 'Sunlight Preference'.tr, // TODO(RV): Add i18n strings
+            ),
+            const SizedBox(height: 24.0),
 
-            // TODO(RV): Add soiltype input field
+            // TODO(RV): Add soiltype input field?
 
             // Notes field
-            // TODO(RV): Add list view of added notes, "add" button
-            const SizedBox(height: 16.0),
-            NotesField(controller: _noteController, list: _notes),
-            const SizedBox(height: 16.0),
+            NotesField(
+              controller: _noteController,
+              notes: _notes,
+              onPressed: () {
+                setState(() {
+                  if (_notes.contains(_noteController.text) ||
+                      _noteController.text == '') {
+                    return;
+                  }
+                  _notes.add(_noteController.text);
+                });
+              },
+            ),
 
+            const SizedBox(height: 8.0),
             TagsField(
-              list: _notes,
+              // list: _tags,
               controller: _tagController,
               tags: _tags,
               onPressed: () {
@@ -365,33 +418,35 @@ class _AddPlantPageState extends State<AddPlantPage> {
     return Obx(
       () => Scaffold(
         backgroundColor: AppTheme.backgroundColor(),
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: AppTheme.backgroundColor(),
-              title: Text(
-                'add-plant'.tr,
-                style: TextStyle(fontSize: 40.0, color: AppColors.green),
-              ),
-              automaticallyImplyLeading: false,
-              centerTitle: true,
-              // floating: true,
-              // pinned: true,
+        body: SizedBox(
+          height: Get.height,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                AppBar(
+                  backgroundColor: AppTheme.backgroundColor(),
+                  title: Text(
+                    'add-plant'.tr,
+                    style: TextStyle(fontSize: 40.0, color: AppColors.green),
+                  ),
+                  automaticallyImplyLeading: false,
+                  centerTitle: true,
+                  // floating: true,
+                  // pinned: true,
+                ),
+                Column(
+                  children: <Widget>[
+                    _buildAddPlantForm(),
+                    const SizedBox(height: 16.0),
+                    SubmitButton(onSubmit: onSubmit),
+                    const SizedBox(height: 8.0),
+                    const CancelButton(),
+                    const SizedBox(height: 16.0),
+                  ],
+                ),
+              ],
             ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                children: <Widget>[
-                  _buildAddPlantForm(),
-                  const SizedBox(height: 16.0),
-                  SubmitButton(onSubmit: onSubmit),
-                  const SizedBox(height: 8.0),
-                  const CancelButton(),
-                  const SizedBox(height: 16.0),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
