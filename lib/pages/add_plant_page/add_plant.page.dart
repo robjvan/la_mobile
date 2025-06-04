@@ -1,7 +1,6 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
@@ -17,6 +16,8 @@ import 'package:la_mobile/pages/add_plant_page/widgets/tags_field.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/text_input_field.dart';
 import 'package:la_mobile/services/plants.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
+import 'package:la_mobile/widgets/buttons/la_button.dart';
+import 'package:la_mobile/widgets/buttons/la_cancel_button.dart';
 import 'package:la_mobile/widgets/dialogs/error_dialog.dart';
 
 enum PreferenceEnum { low, medium, high }
@@ -161,7 +162,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: Column(
           children: <Widget>[
-            // Image upload box
+            //# Image upload box
             ImageBox(
               onTap: () {
                 // TODO(RV): Add logic
@@ -175,7 +176,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             ),
             const SizedBox(height: 16.0),
 
-            // Name field
+            //# Name field
             LaTextInputField(
               label: 'name'.tr, // TODO(RV): Add i18n strings
               controller: _nameController,
@@ -189,7 +190,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             ),
             const SizedBox(height: 16.0),
 
-            // Species field
+            //# Species field
             LaTextInputField(
               label: 'species'.tr, // TODO(RV): Add i18n strings
               controller: _speciesController,
@@ -199,7 +200,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             ),
             const SizedBox(height: 16.0),
 
-            // Location field
+            //# Location field
             LaTextInputField(
               label: 'location'.tr, // TODO(RV): Add i18n strings
               controller: _locationController,
@@ -207,7 +208,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             ),
             const SizedBox(height: 16.0),
 
-            // Watering reminder checkbox
+            //# Watering reminder checkbox
             LaReminderToggle(
               label: 'new-plant.watering-reminders'.tr,
               condition: _wateringReminderEnabled,
@@ -218,7 +219,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
               },
             ),
 
-            // Watering interval number picker, inactive unless reminder enabled
+            //# Watering interval number picker, inactive unless reminder enabled
             LaNumberPicker(
               label: 'new-plant.watering-interval'.tr,
               condition: _wateringReminderEnabled,
@@ -245,7 +246,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
               controller: _wateringIntervalController,
             ),
 
-            // "Last watered" date picker, optional
+            //# "Last watered" date picker, optional
             LaDatePicker(
               label: 'new-plant.last-watered'.tr,
               variable: _lastWateredAt,
@@ -265,11 +266,11 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 }
               },
             ),
-
-            // TODO(RV): Add waterAmount field?
             const SizedBox(height: 16.0),
 
-            // Fertilizer reminder checkbox
+            // TODO(RV): Add waterAmount field?
+
+            //# Fertilizer reminder checkbox
             LaReminderToggle(
               label: 'new-plant.fertilizer-reminders'.tr,
               condition: _fertilizerReminderEnabled,
@@ -280,7 +281,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
               },
             ),
 
-            // Fertilizer interval number picker, inactive unless reminder enabled
+            //# Fertilizer interval number picker, inactive unless reminder enabled
             LaNumberPicker(
               label: 'new-plant.fertilizer-interval'.tr,
               condition: _fertilizerReminderEnabled,
@@ -309,7 +310,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
               controller: _fertilizerIntervalController,
             ),
 
-            // "Last fertilized" date picker, optional
+            //# "Last fertilized" date picker, optional
             LaDatePicker(
               label:
                   'Last fertilized (optional):'
@@ -336,7 +337,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
             // TODO(RV): Add fertilizerAmount field?
 
-            // Humidity preference 3-way switch
+            //# Humidity preference 3-way switch
             LaPreferenceToggle(
               onToggle: (final int? index) {
                 switch (index) {
@@ -355,7 +356,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
             ),
             const SizedBox(height: 16.0),
 
-            // Sunlight preference 3-way switch
+            //# Sunlight preference 3-way switch
             LaPreferenceToggle(
               onToggle: (final int? index) {
                 switch (index) {
@@ -376,7 +377,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
             // TODO(RV): Add soiltype input field?
 
-            // Notes field
+            //# Notes field
             NotesField(
               controller: _noteController,
               notes: _notes,
@@ -390,10 +391,9 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 });
               },
             ),
-
             const SizedBox(height: 8.0),
+
             TagsField(
-              // list: _tags,
               controller: _tagController,
               tags: _tags,
               onPressed: () {
@@ -436,11 +436,16 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 ),
                 Column(
                   children: <Widget>[
+                    //# New plant form
                     _buildAddPlantForm(),
                     const SizedBox(height: 16.0),
-                    SubmitButton(onSubmit: onSubmit),
+
+                    //# Submit button
+                    LaButton(action: onSubmit, label: 'submit'.tr),
                     const SizedBox(height: 8.0),
-                    const CancelButton(),
+
+                    //# Cancel button
+                    const LaCancelButton(),
                     const SizedBox(height: 16.0),
                   ],
                 ),
