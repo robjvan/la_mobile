@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/tag_pill.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class TagsField extends StatefulWidget {
   final TextEditingController controller;
-  final List<String> list;
   final Function() onPressed;
   final List<String> tags;
 
   const TagsField({
-    required this.list,
-    required this.onPressed,
     required this.controller,
+    required this.onPressed,
     required this.tags,
     super.key,
   });
@@ -29,6 +26,7 @@ class _TagsFieldState extends State<TagsField> {
       children: <Widget>[
         Text('tags'.tr, style: TextStyle(fontSize: 24.0)),
         TextFormField(
+          onFieldSubmitted: (final _) => widget.onPressed(),
           style: TextStyle(color: AppTheme.textColor()),
           controller: widget.controller,
           validator: (final dynamic val) => null,
