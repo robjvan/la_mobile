@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/buttons/la_button.dart';
 

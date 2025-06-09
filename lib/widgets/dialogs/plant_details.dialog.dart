@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
