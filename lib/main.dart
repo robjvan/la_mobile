@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:la_mobile/secrets.dart';
+import 'package:la_mobile/services/appwrite-service.dart';
 import 'package:la_mobile/utilities/routes.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/utilities/translations.dart';
@@ -15,14 +16,17 @@ void main() async {
   await GetStorage.init();
 
   // Initilize connection to AppWrite
-  final Client client = Client();
+  // final Client client = Client();
+  // final Storage storage;
 
-  client
-      .setEndpoint('https://appwrite.robjvan.ca/v1')
-      .setProject(AppSecrets.appWriteProjectId)
-      .setSelfSigned(
-        status: true,
-      ); // For self signed certificates, only use for development;
+  // client
+  //     .setEndpoint('https://appwrite.robjvan.ca/v1')
+  //     .setProject(AppSecrets.appWriteProjectId)
+  //     .setSelfSigned(
+  //       status: true,
+  //     ); // For self signed certificates, only use for development;
+
+  // final Storage storage = Storage(client);
 
   /// Lock app in portrait orientation
   await SystemChrome.setPreferredOrientations([
