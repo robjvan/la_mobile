@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:la_mobile/secrets.dart';
-import 'package:la_mobile/services/appwrite-service.dart';
+import 'package:la_mobile/services/appwrite.service.dart';
 import 'package:la_mobile/utilities/routes.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/utilities/translations.dart';

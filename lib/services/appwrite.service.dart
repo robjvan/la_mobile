@@ -39,31 +39,4 @@ class AppWriteService {
       return null;
     }
   }
-  // static Future<String?> uploadImage(final XFile file) async {
-  //   try {
-  //     final _client = Client();
-
-  //     final storage = Storage(
-  //       _client
-  //           .setEndpoint('https://appwrite.robjvan.ca/v1')
-  //           .setProject(AppSecrets.appWriteProjectId)
-  //           .setSelfSigned(status: true),
-  //     );
-
-  //     final result = await storage.createFile(
-  //       bucketId: AppSecrets.appWriteBucketId,
-  //       fileId: ID.unique(),
-  //       file: InputFile.fromPath(path: file.path, filename: file.name),
-  //     );
-
-  //     // Construct a public image URL if the file is public
-  //     final url =
-  //         'https://appwrite.robjvan.ca/v1/storage/buckets/${AppSecrets.appWriteBucketId}/files/${result.$id}/view?project=${AppSecrets.appWriteProjectId}';
-
-  //     return url;
-  //   } on Exception catch (e) {
-  //     print('Upload error: $e');
-  //     return null;
-  //   }
-  // }
 }

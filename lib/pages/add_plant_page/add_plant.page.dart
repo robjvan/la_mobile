@@ -16,7 +16,7 @@ import 'package:la_mobile/pages/add_plant_page/widgets/number_picker.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/reminder_toggle.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/tags_field.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/text_input_field.dart';
-import 'package:la_mobile/services/appwrite-service.dart';
+import 'package:la_mobile/services/appwrite.service.dart';
 import 'package:la_mobile/services/plants.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/buttons/la_button.dart';
