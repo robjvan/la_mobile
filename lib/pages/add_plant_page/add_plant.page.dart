@@ -66,6 +66,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
   bool _isUploading = false;
 
   double? _waterAmount;
+  double? _fertilizerAmount;
   final List<String> _tags = <String>[];
   final List<String> _notes = <String>[];
   String? _imageUrl;
@@ -209,6 +210,8 @@ class _AddPlantPageState extends State<AddPlantPage> {
             lastWateredAt:
                 _wateringReminderEnabled ? _lastWateredAt.toString() : null,
             waterAmount: _wateringReminderEnabled ? _waterAmount : null,
+            fertilizerAmount:
+                _wateringReminderEnabled ? _fertilizerAmount : null,
             fertilizerReminderEnabled: _fertilizerReminderEnabled,
             fertilizerIntervalDays:
                 _fertilizerReminderEnabled
@@ -518,7 +521,14 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 ),
                 const SizedBox(height: 16.0),
 
-                // TODO(RV): Add fertilizerAmount field?
+                // TODO(RV): Add fertilizerAmount field
+
+                //# Soil type field
+                LaTextInputField(
+                  label: 'soil type'.tr,
+                  controller: _soilTypeController,
+                  hintText: 'e.g. rocky, or loam',
+                ),
 
                 //# Humidity preference 3-way switch
                 LaPreferenceToggle(
