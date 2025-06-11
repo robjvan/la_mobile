@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:camera/camera.dart';
 import 'package:la_mobile/secrets.dart';
 
@@ -26,7 +27,7 @@ class AppWriteService {
   /// Uploads an image file to the Appwrite storage bucket and returns the public view URL
   Future<String?> uploadImage(final XFile file) async {
     try {
-      final result = await _storage.createFile(
+      final File result = await _storage.createFile(
         bucketId: AppSecrets.appWriteBucketId,
         fileId: ID.unique(),
         file: InputFile.fromPath(path: file.path, filename: file.name),
@@ -34,7 +35,7 @@ class AppWriteService {
 
       // Return a public URL to access the uploaded file
       return 'https://appwrite.robjvan.ca/v1/storage/buckets/${AppSecrets.appWriteBucketId}/files/${result.$id}/view?project=${AppSecrets.appWriteProjectId}';
-    } catch (e) {
+    } on Exception catch (e) {
       print('Upload error: $e');
       return null;
     }
