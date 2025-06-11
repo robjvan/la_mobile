@@ -10,9 +10,19 @@ Cum dolores quia iste quia excepturi voluptatem quos aliquam. Consequuntur rerum
 
 Dolorem aut repudiandae. Consequatur ipsum sed nihil doloribus totam. Veritatis qui est dignissimos.
 
+### Upload photos
+
+Gallery or camera blah blah Sit architecto cupiditate doloribus delectus voluptatem cum aut. Voluptatem ut ut.
+
 ### _Autofill plant species suggestions from DB?_
 
 _Impedit pariatur nesciunt cum. Minima omnis iure tempore nulla tempore qui ab dolor perspiciatis. Rerum vitae asperiores deleniti._
+
+## App Features
+
+- Uses Get package for global reactive state store, local storage, translations, navigation
+- All services built as singletons to provide structural, performance, and architectural benefits
+- Leverages AppWrite for image storage and custom API hosted on Coolify
 
 ## Developer Info
 
