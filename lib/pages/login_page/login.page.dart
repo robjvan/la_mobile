@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoadingWidget() {
     return Column(
-      children: [
+      children: <Widget>[
         SizedBox(
           height: 32.0,
           child: CircularProgressIndicator(color: AppColors.green),
