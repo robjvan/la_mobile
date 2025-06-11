@@ -10,6 +10,10 @@ class NewPasswordDialog extends StatelessWidget {
     // If OK response is returned, update UI message to confirm password has been changed
     // When user clicks "Ok", route to login page
     // TODO(RV): Add logic
-    return const Placeholder();
+    return const SimpleDialog(
+      children: <Widget>[
+        // TODO(RV): Add widgets
+      ],
+    );
   }
 }
