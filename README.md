@@ -27,6 +27,7 @@ _Impedit pariatur nesciunt cum. Minima omnis iure tempore nulla tempore qui ab d
 ## Developer Info
 
 ### Setting up your dev environment
+
 Error ipsam possimus ut sit dolorum atque non. Officia odio aut vitae est accusamus consequatur. Et consequuntur adipisci odit ut dolorem libero. Quae laudantium odio adipisci id id libero.
 
 #### Framework versions
@@ -38,12 +39,15 @@ This project was built using Flutter version `3.29.3` and Dart version `3.7.2`.
 Necessitatibus aspernatur consequatur veniam tempore fugit. Laborum similique sint est. Sapiente et sit voluptas voluptate maiores in sed.
 
 ### Building for release
+
 Deleniti iusto accusamus qui eaque. Iste nesciunt alias culpa dolor. Animi sunt cupiditate tempore ut consequatur aut eaque repellendus. Autem ut hic enim ut magni harum soluta.
 
 ## Terms of Service
+
 Tempora occaecati alias vitae eum eligendi placeat illo commodi. Ea non in ut sit. Nulla id eos sunt suscipit occaecati possimus. Ea similique numquam vitae a.
 
 ## Privacy Policy
+
 Et doloremque voluptas. Laudantium deleniti nostrum ipsum iure possimus perspiciatis. Et facilis dolor.
 
 ## Download Links
