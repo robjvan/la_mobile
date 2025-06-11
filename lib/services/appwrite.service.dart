@@ -17,7 +17,7 @@ class AppWriteService {
   AppWriteService._internal() {
     _client =
         Client()
-          ..setEndpoint('https://appwrite.robjvan.ca/v1')
+          ..setEndpoint(AppSecrets.appwriteUrl)
           ..setProject(AppSecrets.appWriteProjectId)
           ..setSelfSigned(status: true); // For self-hosted dev environments
 
@@ -34,7 +34,7 @@ class AppWriteService {
       );
 
       // Return a public URL to access the uploaded file
-      return 'https://appwrite.robjvan.ca/v1/storage/buckets/${AppSecrets.appWriteBucketId}/files/${result.$id}/view?project=${AppSecrets.appWriteProjectId}';
+      return '${AppSecrets.appwriteUrl}/storage/buckets/${AppSecrets.appWriteBucketId}/files/${result.$id}/view?project=${AppSecrets.appWriteProjectId}';
     } on Exception catch (e) {
       print('Upload error: $e');
       return null;
