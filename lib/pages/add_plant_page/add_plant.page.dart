@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/date_picker.dart';
+import 'package:la_mobile/pages/add_plant_page/widgets/image_box.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/la_preference_toggle.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/notes_field.dart';
 import 'package:la_mobile/pages/add_plant_page/widgets/number_picker.dart';
@@ -21,7 +20,9 @@ import 'package:la_mobile/services/plants.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 import 'package:la_mobile/widgets/buttons/la_button.dart';
 import 'package:la_mobile/widgets/buttons/la_cancel_button.dart';
+import 'package:la_mobile/widgets/dialogs/capture_photo.dialog.dart';
 import 'package:la_mobile/widgets/dialogs/error_dialog.dart';
+import 'package:la_mobile/widgets/dialogs/photo_source.dialog.dart';
 
 enum PreferenceEnum { low, medium, high }
 
@@ -73,6 +74,23 @@ class _AddPlantPageState extends State<AddPlantPage> {
   String? _retrieveDataError;
   final ImagePicker _picker = ImagePicker();
 
+  Future<void> _initCamera() async {
+    // Obtain a list of the available cameras on the device.
+    final List<CameraDescription> cameras = await availableCameras();
+    // Get a specific camera from the list of available cameras.
+    final CameraDescription firstCamera = cameras.first;
+
+    _cameraController = CameraController(
+      // Get a specific camera from the list of available cameras.
+      firstCamera,
+      // Define the resolution to use.
+      ResolutionPreset.medium,
+    );
+
+    // Next, initialize the controller. This returns a Future.
+    _initializeCameraControllerFuture = _cameraController.initialize();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -100,22 +118,49 @@ class _AddPlantPageState extends State<AddPlantPage> {
     final ImageSource source, {
     required final BuildContext context,
   }) async {
+    Future<void> _cameraAction() async {
+      await Get.dialog(
+        CapturePhotoDialog(
+          controller: _cameraController,
+          onPressed: () async {
+            final XFile file = await _cameraController.takePicture();
+            setState(() {
+              _mediaFile = file;
+            });
+            Get.back();
+          },
+          cameraFuture: _initializeCameraControllerFuture,
+        ),
+      );
+
+      if (_mediaFile != null) {
+        Get.back();
+      }
+    }
+
+    Future<void> _galleryAction() async {
+      try {
+        // Opens camera or gallery to pick a plant image
+        final XFile? pickedFile = await _picker.pickImage(source: source);
+        setState(() {
+          _mediaFile = pickedFile;
+        });
+      } on Exception catch (e) {
+        setState(() {
+          _pickImageError = e;
+        });
+      }
+
+      // onPick();
+      Get.back();
+    }
+
     if (context.mounted) {
-      await _displayPickImageDialog(
-        context: context,
-        onPick: () async {
-          try {
-            // Opens camera or gallery to pick a plant image
-            final XFile? pickedFile = await _picker.pickImage(source: source);
-            setState(() {
-              _mediaFile = pickedFile;
-            });
-          } on Exception catch (e) {
-            setState(() {
-              _pickImageError = e;
-            });
-          }
-        },
+      await Get.dialog(
+        PhotoSourceDialog(
+          cameraAction: _cameraAction,
+          galleryAction: _galleryAction,
+        ),
       );
     }
   }
@@ -220,111 +265,6 @@ class _AddPlantPageState extends State<AddPlantPage> {
     }
   }
 
-  Future<void> _initCamera() async {
-    // Obtain a list of the available cameras on the device.
-    final List<CameraDescription> cameras = await availableCameras();
-    // Get a specific camera from the list of available cameras.
-    final CameraDescription firstCamera = cameras.first;
-
-    _cameraController = CameraController(
-      // Get a specific camera from the list of available cameras.
-      firstCamera,
-      // Define the resolution to use.
-      ResolutionPreset.medium,
-    );
-
-    // Next, initialize the controller. This returns a Future.
-    _initializeCameraControllerFuture = _cameraController.initialize();
-  }
-
-  Future<void> _takePicture() async {
-    await Get.dialog(
-      SimpleDialog(
-        children: <Widget>[
-          FutureBuilder<void>(
-            future: _initializeCameraControllerFuture,
-            builder: (
-              final BuildContext context,
-              final AsyncSnapshot<void> snapshot,
-            ) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                // If the Future is complete, display the preview.
-                return SizedBox(
-                  height: Get.height / 2.5,
-                  child: Scaffold(
-                    backgroundColor: Colors.transparent,
-                    floatingActionButtonLocation:
-                        FloatingActionButtonLocation.centerDocked,
-                    floatingActionButton: FloatingActionButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(50),
-                      ),
-                      backgroundColor: AppColors.green,
-                      foregroundColor: AppColors.white,
-                      child: Icon(Icons.camera_alt_outlined),
-                      onPressed: () async {
-                        final XFile file =
-                            await _cameraController.takePicture();
-                        setState(() {
-                          _mediaFile = file;
-                        });
-                        Get.back();
-                      },
-                    ),
-                    body: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(16),
-                        child: CameraPreview(_cameraController),
-                      ),
-                    ),
-                  ),
-                );
-              } else {
-                // Otherwise, display a loading indicator.
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-        ],
-      ),
-    );
-
-    if (_mediaFile != null) {
-      Get.back();
-    }
-  }
-
-  Future<void> _displayPickImageDialog({
-    required final BuildContext context,
-    required final Function() onPick,
-  }) async {
-    return showDialog(
-      context: context,
-      builder: (final BuildContext context) {
-        return AlertDialog(
-          actionsAlignment: MainAxisAlignment.center,
-          title: const Text(
-            'Choose image source', // TODO(RV): Add i18n strings
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              LaButton(action: _takePicture, label: 'camera'.tr),
-              LaButton(
-                action: () {
-                  onPick();
-                  Navigator.of(context).pop();
-                },
-                label: 'gallery'.tr, // TODO(RV): Add i18n strings
-              ),
-            ],
-          ),
-          actions: <Widget>[LaCancelButton()],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(final BuildContext context) {
     return Obx(
@@ -386,7 +326,14 @@ class _AddPlantPageState extends State<AddPlantPage> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.waiting:
-                        return _imageBox();
+                        return ImageBox(
+                          onTap:
+                              () => _onImageButtonPressed(
+                                ImageSource.gallery,
+                                context: context,
+                              ),
+                          mediaFile: _mediaFile,
+                        );
                       case ConnectionState.done:
                         return _previewImage();
                       case ConnectionState.active:
@@ -396,7 +343,14 @@ class _AddPlantPageState extends State<AddPlantPage> {
                             textAlign: TextAlign.center,
                           );
                         } else {
-                          return _imageBox();
+                          return ImageBox(
+                            onTap:
+                                () => _onImageButtonPressed(
+                                  ImageSource.gallery,
+                                  context: context,
+                                ),
+                            mediaFile: _mediaFile,
+                          );
                         }
                     }
                   },
@@ -657,68 +611,22 @@ class _AddPlantPageState extends State<AddPlantPage> {
       return retrieveError;
     }
     if (_mediaFile != null) {
-      return _imageBox();
+      return ImageBox(
+        onTap:
+            () => _onImageButtonPressed(ImageSource.gallery, context: context),
+        mediaFile: _mediaFile,
+      );
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError', // TODO(RV): Add i18n strings
         textAlign: TextAlign.center,
       );
     } else {
-      return _imageBox();
+      return ImageBox(
+        onTap:
+            () => _onImageButtonPressed(ImageSource.gallery, context: context),
+        mediaFile: _mediaFile,
+      );
     }
-  }
-
-  Widget _imageBox() {
-    return GestureDetector(
-      onTap: () => _onImageButtonPressed(ImageSource.gallery, context: context),
-      child:
-          _mediaFile == null
-              ? SizedBox(
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: Card(
-                        elevation: 4,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: Image.asset(
-                            'assets/images/image_placeholder.png',
-                            height: Get.width * 0.5,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 160.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'new-plant.upload-photo'.tr,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-              : ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(16),
-                child: Image.file(
-                  File(_mediaFile!.path),
-                  errorBuilder: (
-                    final BuildContext context,
-                    final Object error,
-                    final StackTrace? stackTrace,
-                  ) {
-                    return Center(
-                      child: Text(
-                        'This image type is not supported'
-                            .tr, // TODO(RV): Add i18n strings
-                      ),
-                    );
-                  },
-                ),
-              ),
-    );
   }
 }
