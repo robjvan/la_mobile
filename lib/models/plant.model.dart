@@ -15,6 +15,7 @@ class PlantModel {
   final bool wateringReminderEnabled;
   final List<dynamic>? tags;
   final double? waterAmount;
+  final double? fertilizerAmount;
   final bool? archived;
   final String? createdAt;
   final int? userId;
@@ -37,6 +38,7 @@ class PlantModel {
     this.lastFertilizedAt,
     this.tags,
     this.waterAmount,
+    this.fertilizerAmount,
     this.archived,
     this.createdAt,
   });
@@ -58,6 +60,7 @@ class PlantModel {
     wateringReminderEnabled: false,
     tags: null,
     waterAmount: null,
+    fertilizerAmount: null,
     archived: null,
     userId: null,
   );
@@ -79,6 +82,7 @@ class PlantModel {
     wateringReminderEnabled: json['wateringReminderEnabled'] ?? false,
     tags: json['tags'],
     waterAmount: json['waterAmount'],
+    fertilizerAmount: json['fertilizerAmount'],
     archived: json['archived'],
     createdAt: json['createdAt'],
     userId: json['userId'],
@@ -101,6 +105,7 @@ class PlantModel {
     'wateringReminderEnabled': wateringReminderEnabled,
     'tags': tags,
     'waterAmount': waterAmount,
+    'fertilizerAmount': fertilizerAmount,
     'archived': archived,
     'createdAt': createdAt,
     'userId': userId,
