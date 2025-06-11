@@ -10,6 +10,7 @@
 analyzer:
   errors:
     constant_identifier_names: ignore
+    no_leading_underscores_for_local_identifiers: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:
@@ -86,7 +87,7 @@ linter:
     # Missing whitespace between adjacent strings
     missing_whitespace_between_adjacent_strings: true
 
-    no_leading_underscores_for_local_identifiers: true
+    # no_leading_underscores_for_local_identifiers: true
     # Noop primitive operations
     noop_primitive_operations: true
     # Provide doc comments for all public APIs

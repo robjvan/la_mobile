@@ -18,14 +18,8 @@ class _LaAppbarState extends State<LaAppbar> {
     return PreferredSize(
       preferredSize: Size.fromHeight(kAppBarHeight),
       child: AppBar(
-        backgroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.bgColorDarkMode
-                : AppColors.bgColorLightMode,
-        foregroundColor:
-            AppStateController.useDarkMode.value
-                ? AppColors.textColorDarkMode
-                : AppColors.textColorLightMode,
+        backgroundColor: AppTheme.backgroundColor(),
+        foregroundColor: AppTheme.textColor(),
         leading: Image.asset('assets/logo/logo.png'),
         title: Text(widget.title),
         actions: <Widget>[

@@ -33,12 +33,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           Text(
             'loading-metrics'.tr,
             // 'yerp derp',
-            style: TextStyle(
-              color:
-                  AppStateController.useDarkMode.value
-                      ? AppColors.textColorDarkMode
-                      : AppColors.textColorLightMode,
-            ),
+            style: TextStyle(color: AppTheme.textColor()),
           ),
         ],
       ),
@@ -303,7 +298,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   MetricsRow _buildGeographicalMetricsRow() {
     return MetricsRow(
       label: 'geographical-metrics'.tr,
-      cards: [
+      cards: <MetricsCard>[
         MetricsCard(
           'usersInCanada'.tr,
           MetricsController.metrics.value.geographicalMetrics.usersInCanada
@@ -362,10 +357,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          AppStateController.useDarkMode.value
-              ? AppColors.bgColorDarkMode
-              : AppColors.bgColorLightMode,
+      backgroundColor: AppTheme.backgroundColor(),
       body: Obx(
         () =>
             AppStateController.isLoading.value

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/pages/login_page/widgets/password.field.dart';
 import 'package:la_mobile/pages/login_page/widgets/username.field.dart';
 import 'package:la_mobile/utilities/theme.dart';
@@ -46,12 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
             children: <Widget>[
               Text(
                 'Receive newsletter?',
-                style: TextStyle(
-                  color:
-                      AppStateController.useDarkMode.value
-                          ? AppColors.textColorDarkMode
-                          : AppColors.textColorLightMode,
-                ),
+                style: TextStyle(color: AppTheme.textColor()),
               ),
               Checkbox(
                 shape: RoundedRectangleBorder(

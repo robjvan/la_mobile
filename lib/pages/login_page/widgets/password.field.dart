@@ -24,9 +24,7 @@ class _PasswordFieldState extends State<PasswordField> {
           color:
               AppStateController.isLoading.value
                   ? AppColors.lightGrey
-                  : AppStateController.useDarkMode.value
-                  ? AppColors.textColorDarkMode
-                  : AppColors.textColorLightMode,
+                  : AppTheme.textColor(),
         ),
         decoration: InputDecoration(
           hintText: 'password'.tr,

@@ -39,9 +39,7 @@ class ForgotPasswordButton extends StatelessWidget {
                     color:
                         AppStateController.isLoading.value
                             ? AppColors.lightGrey
-                            : AppStateController.useDarkMode.value
-                            ? AppColors.textColorDarkMode
-                            : AppColors.textColorLightMode,
+                            : AppTheme.textColor(),
                   ),
                 ),
               ),

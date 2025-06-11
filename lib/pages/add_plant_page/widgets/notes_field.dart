@@ -1,14 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
+import 'package:la_mobile/pages/add_plant_page/widgets/tag_pill.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
-class NotesField extends StatelessWidget {
+class NotesField extends StatefulWidget {
   final TextEditingController controller;
-  final List<String> list;
-  // final validator;
-  // final hintText;
-  const NotesField({required this.controller, required this.list, super.key});
+  final Function() onPressed;
+  final List<String> notes;
+
+  const NotesField({
+    required this.controller,
+    required this.onPressed,
+    required this.notes,
+    super.key,
+  });
+
+  @override
+  State<NotesField> createState() => _NotesFieldState();
+}
+
+class _NotesFieldState extends State<NotesField> {
+  Widget _buildInputField() {
+    return TextFormField(
+      onFieldSubmitted: (final _) => widget.onPressed(),
+      controller: widget.controller,
+      style: TextStyle(color: AppTheme.textColor()),
+      validator: (final dynamic val) => null,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
+        hintText: 'new-plant.notes-hint'.tr,
+        hintStyle: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.green, width: 2),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.add, color: AppTheme.textColor()),
+          onPressed: widget.onPressed,
+        ),
+      ),
+      autovalidateMode: AutovalidateMode.onUnfocus,
+    );
+  }
+
+  Widget _buildNotesList() {
+    return SizedBox(
+      width: Get.width,
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: widget.notes.length,
+        padding: const EdgeInsets.only(top: 8),
+        itemBuilder: (final BuildContext context, final int i) {
+          return Column(
+            children: <Widget>[
+              if (i != 0) const SizedBox(height: 4.0),
+              LaTagPill(
+                tag: widget.notes[i],
+                onDelete: () {
+                  setState(() {
+                    widget.notes.removeAt(i);
+                  });
+                },
+                small: false,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(final BuildContext context) {
@@ -16,36 +77,11 @@ class NotesField extends StatelessWidget {
       children: <Widget>[
         Text(
           'notes'.tr,
-          style: TextStyle(
-            fontSize: 24.0,
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(fontSize: 24.0, color: AppTheme.textColor()),
         ),
-        TextFormField(
-          controller: controller,
-          style: TextStyle(
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
-          validator: (final dynamic val) => null,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            hintText: 'new-plant.notes-hint'.tr,
-            hintStyle: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.green, width: 2),
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-          ),
-          autovalidateMode: AutovalidateMode.onUnfocus,
-        ),
+        _buildInputField(),
+        if (widget.notes.isNotEmpty) _buildNotesList(),
+        const SizedBox(height: 8.0),
       ],
     );
   }

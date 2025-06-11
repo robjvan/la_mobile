@@ -17,35 +17,45 @@ class PlantGridTile extends StatelessWidget {
       onTap: () {
         unawaited(Get.dialog(PlantDetailsDialog(plant)));
       },
-      child: GridTile(
-        footer: DecoratedBox(
-          decoration: BoxDecoration(color: Colors.white24),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 4.0),
-            child: Row(
-              children: <Widget>[
-                Text(plant.name ?? '', overflow: TextOverflow.ellipsis),
-                Spacer(),
-                (plant.imageUrls == null) || (plant.imageUrls!.isEmpty)
-                    ? Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Icon(
-                        Icons.warning_rounded,
-                        size: 16.0,
-                        color: AppColors.red,
-                      ),
-                    )
-                    : Container(),
-              ],
+      child: ClipRRect(
+        borderRadius: BorderRadiusGeometry.circular(8),
+        child: GridTile(
+          footer: DecoratedBox(
+            decoration: BoxDecoration(color: Colors.black54),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 4.0),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    plant.name ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: AppColors.white),
+                  ),
+                  Spacer(),
+                  (plant.lastWateredAt == null)
+                      ? Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(
+                          Icons.warning_rounded,
+                          size: 16.0,
+                          color: AppColors.red,
+                        ),
+                      )
+                      : Container(),
+                ],
+              ),
             ),
           ),
+          child:
+              (plant.imageUrls != null) &&
+                      plant.imageUrls!.isNotEmpty &&
+                      plant.imageUrls![0] != null
+                  ? CachedNetworkImage(
+                    imageUrl: plant.imageUrls![0],
+                    fit: BoxFit.cover,
+                  )
+                  : Image.asset('assets/images/image_placeholder.png'),
         ),
-        child:
-            (plant.imageUrls != null) &&
-                    plant.imageUrls!.isNotEmpty &&
-                    plant.imageUrls![0] != null
-                ? CachedNetworkImage(imageUrl: plant.imageUrls![0])
-                : Image.asset('assets/images/image_placeholder.png'),
       ),
     );
   }

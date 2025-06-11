@@ -11,16 +11,24 @@ environment:
 dependencies:
   appwrite: ^16.0.0
   cached_network_image: ^3.4.1
+  camera: ^0.11.1
   cupertino_icons: ^1.0.8
   custom_refresh_indicator: ^4.0.1
+  enum_to_string: ^2.2.1
   flutter:
     sdk: flutter
   flutter_speed_dial: ^7.0.0
   get: ^4.7.2
   get_storage: ^2.1.1
   http: ^1.4.0
+  image_picker: ^1.1.2
+  image_picker_platform_interface: ^2.10.1
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  toggle_switch: ^2.3.0
 
 dev_dependencies:
+  flutter_launcher_icons: '^0.14.3'
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
@@ -46,3 +54,21 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+flutter_launcher_icons:
+  android: 'launcher_icon'
+  ios: true
+  image_path: 'assets/logo/logo.png'
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: false
+    image_path: 'assets/logo/logo.png'
+    background_color: '#hexcode'
+    theme_color: '#hexcode'
+  windows:
+    generate: false
+    image_path: 'assets/logo/logo.png'
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: false
+    image_path: 'assets/logo/logo.png'

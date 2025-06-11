@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
 class LaTextInputField extends StatelessWidget {
@@ -22,13 +21,7 @@ class LaTextInputField extends StatelessWidget {
       children: <Widget>[
         Text(
           label,
-          style: TextStyle(
-            fontSize: 24.0,
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(fontSize: 24.0, color: AppTheme.textColor()),
         ),
         TextFormField(
           controller: controller,
@@ -37,12 +30,7 @@ class LaTextInputField extends StatelessWidget {
               (final String? val) {
                 return null;
               },
-          style: TextStyle(
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
-          ),
+          style: TextStyle(color: AppTheme.textColor()),
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.0),

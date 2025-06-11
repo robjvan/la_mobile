@@ -11,6 +11,44 @@ class MetricsCard extends StatelessWidget {
 
   const MetricsCard(this.label, this.value, {super.key});
 
+  Widget _buildHeader() {
+    return Text(
+      label,
+      style: TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.bold,
+        color: AppTheme.textColor(),
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget _buildValue() {
+    return SizedBox(
+      height: 48.0,
+      child: Center(
+        child: Text(
+          value != ''
+              ? value.substring(0, 1).toUpperCase() + value.substring(1)
+              : '',
+          style: TextStyle(
+            fontSize:
+                numberReg.hasMatch(value)
+                    ? 36.0
+                    : value.length > 6
+                    ? 18.0
+                    : 24.0,
+            color:
+                AppStateController.useDarkMode.value
+                    ? AppColors.limeGreen
+                    : AppColors.textColorLightMode,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(final BuildContext context) {
     return Card(
@@ -25,42 +63,9 @@ class MetricsCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const Spacer(),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
-                color:
-                    AppStateController.useDarkMode.value
-                        ? AppColors.textColorDarkMode
-                        : AppColors.textColorLightMode,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            _buildHeader(),
             const Spacer(),
-            SizedBox(
-              height: 48.0,
-              child: Center(
-                child: Text(
-                  value != ''
-                      ? value.substring(0, 1).toUpperCase() + value.substring(1)
-                      : '',
-                  style: TextStyle(
-                    fontSize:
-                        numberReg.hasMatch(value)
-                            ? 36.0
-                            : value.length > 6
-                            ? 18.0
-                            : 24.0,
-                    color:
-                        AppStateController.useDarkMode.value
-                            ? AppColors.limeGreen
-                            : AppColors.textColorLightMode,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
+            _buildValue(),
             const SizedBox(height: 8.0),
           ],
         ),

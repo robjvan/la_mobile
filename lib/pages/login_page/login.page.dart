@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoadingWidget() {
     return Column(
-      children: [
+      children: <Widget>[
         SizedBox(
           height: 32.0,
           child: CircularProgressIndicator(color: AppColors.green),
@@ -58,10 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             fontSize: 18.0,
             fontStyle: FontStyle.italic,
             // fontWeight: FontWeight.bold,
-            color:
-                AppStateController.useDarkMode.value
-                    ? AppColors.textColorDarkMode
-                    : AppColors.textColorLightMode,
+            color: AppTheme.textColor(),
           ),
         ),
       ],
