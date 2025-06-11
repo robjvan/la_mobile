@@ -13,38 +13,31 @@ class AppStateController {
 
   static RxBool enableNotifications = false.obs;
 
+  static RxString searchTerm = ''.obs;
+
   static void setLoadingState(final bool isLoading) =>
       AppStateController.isLoading.value = isLoading;
 
   static void toggleDarkMode() {
-    if (AppStateController.useDarkMode.value) {
-      AppStateController.useDarkMode.value = false;
-    } else {
-      AppStateController.useDarkMode.value = true;
-    }
+    AppStateController.useDarkMode.value =
+        !AppStateController.useDarkMode.value;
   }
 
   static void toggleNotifications() {
-    if (AppStateController.enableNotifications.value) {
-      AppStateController.enableNotifications.value = false;
-    } else {
-      AppStateController.enableNotifications.value = true;
-    }
+    AppStateController.enableNotifications.value =
+        !AppStateController.enableNotifications.value;
   }
 
   static void toggleFilterBar() {
-    if (AppStateController.showFilterBar.value) {
-      AppStateController.showFilterBar.value = false;
-    } else {
-      AppStateController.showFilterBar.value = true;
-    }
+    AppStateController.showFilterBar.value =
+        !AppStateController.showFilterBar.value;
   }
 
   static void toggleListView() {
-    if (AppStateController.viewAsList.value) {
-      AppStateController.viewAsList.value = false;
-    } else {
-      AppStateController.viewAsList.value = true;
-    }
+    AppStateController.viewAsList.value = !AppStateController.viewAsList.value;
+  }
+
+  static void clearSearchTerm() {
+    AppStateController.searchTerm.value = '';
   }
 }
