@@ -298,7 +298,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   MetricsRow _buildGeographicalMetricsRow() {
     return MetricsRow(
       label: 'geographical-metrics'.tr,
-      cards: [
+      cards: <MetricsCard>[
         MetricsCard(
           'usersInCanada'.tr,
           MetricsController.metrics.value.geographicalMetrics.usersInCanada
