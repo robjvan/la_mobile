@@ -31,7 +31,7 @@ class LoginButton extends StatelessWidget {
         if (formKey.currentState!.validate()) {
           AppStateController.setLoadingState(true);
 
-          final dynamic response = await UsersService.login(
+          final dynamic response = await UsersService().login(
             usernameController.text,
             passwordController.text,
           );
@@ -39,7 +39,7 @@ class LoginButton extends StatelessWidget {
           if (response.statusCode == 201) {
             // If user wants to store their username, store it with GetStorage
             if (AppStateController.saveUsername.value) {
-              LocalStorageService.storeUsername(usernameController.text);
+              LocalStorageService().storeUsername(usernameController.text);
             }
 
             // Set the local user data using API response
@@ -52,7 +52,7 @@ class LoginButton extends StatelessWidget {
             await Get.offAllNamed(kHomeRouteName);
 
             // Fetch user data - user, profile, plants, etc.
-            await PlantsService.fetchUserPlants();
+            await PlantsService().fetchUserPlants();
             AppStateController.setLoadingState(false);
           } else {
             unawaited(Get.dialog(const BadCredentialsDialog()));

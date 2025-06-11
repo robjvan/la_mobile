@@ -3,10 +3,17 @@ import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/secrets.dart';
 
 class UsersService {
-  static Future<dynamic> login(
-    final String username,
-    final String password,
-  ) async {
+  // Singleton instance
+  static final UsersService _instance = UsersService._internal();
+
+  // Public factory constructor to return the same instance
+  factory UsersService() => _instance;
+
+  // Private constructor
+  UsersService._internal();
+
+  /// Attempt to log in with provided username and password
+  Future<dynamic> login(final String username, final String password) async {
     try {
       final http.Response response = await http.post(
         Uri.parse('${AppSecrets.serverUrl}/$kAuthEndpoint/login'),
@@ -19,9 +26,8 @@ class UsersService {
     }
   }
 
-  static Future<dynamic> submitForgotPasswordRequest(
-    final String username,
-  ) async {
+  /// Submit a forgot password request for the given username
+  Future<dynamic> submitForgotPasswordRequest(final String username) async {
     try {
       final http.Response response = await http.post(
         Uri.parse(

@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    LocalStorageService.loadSaveUsernameSetting();
+    LocalStorageService().loadSaveUsernameSetting();
 
     //! Used for testing, remove for prod
     // usernameController.text = 'dad@dad.com';

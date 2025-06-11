@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     // Fetch user data - user, profile, plants, etc.
-    PlantsService.fetchUserPlants();
+    PlantsService().fetchUserPlants();
   }
 
   LaSearchBar _buildHeader() {
@@ -127,22 +127,24 @@ class _HomePageState extends State<HomePage> {
         width: Get.width,
         height: Get.height,
         child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              const SizedBox(height: 8.0),
-              if (AppStateController.showFilterBar.value) _buildHeader(),
-              Expanded(
-                child: Obx(
-                  () =>
-                      AppStateController.isLoading.value
-                          ? _buildLoadingWidget()
-                          : AppStateController.viewAsList.value
-                          ? _buildListView()
-                          : _buildGridView(),
+          child: Obx(
+            () => Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                const SizedBox(height: 8.0),
+                if (AppStateController.showFilterBar.value) _buildHeader(),
+                Expanded(
+                  child: Obx(
+                    () =>
+                        AppStateController.isLoading.value
+                            ? _buildLoadingWidget()
+                            : AppStateController.viewAsList.value
+                            ? _buildListView()
+                            : _buildGridView(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

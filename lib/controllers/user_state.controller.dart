@@ -23,7 +23,7 @@ class UserStateController {
 
   static void logout() {
     UserStateController.clearUser();
-    PlantsService.clearPlants();
+    PlantsService().clearPlants();
 
     Get.offAllNamed(kLoginRouteName);
   }

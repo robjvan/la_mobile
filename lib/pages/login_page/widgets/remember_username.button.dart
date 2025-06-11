@@ -54,9 +54,9 @@ class _RememberUsernameButtonState extends State<RememberUsernameButton> {
                           rememberUsername = !rememberUsername;
                         });
                         if (value!) {
-                          LocalStorageService.storeSaveUsernameSetting(true);
+                          LocalStorageService().storeSaveUsernameSetting(true);
                         } else {
-                          LocalStorageService.storeSaveUsernameSetting(false);
+                          LocalStorageService().storeSaveUsernameSetting(false);
                         }
                       },
               shape: RoundedRectangleBorder(

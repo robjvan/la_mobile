@@ -34,10 +34,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       action: () async {
         if (_formKey.currentState!.validate()) {
           // Send a request to the backend to start forgot password workflow
-          final dynamic response =
-              await UsersService.submitForgotPasswordRequest(
-                _usernameController.text,
-              );
+          final dynamic response = await UsersService()
+              .submitForgotPasswordRequest(_usernameController.text);
 
           if (response.statusCode == 200) {
             // Show dialog telling user to check email

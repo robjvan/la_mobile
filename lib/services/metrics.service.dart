@@ -10,6 +10,15 @@ import 'package:la_mobile/models/metrics.model.dart';
 import 'package:la_mobile/secrets.dart';
 
 class MetricsService {
+  // Singleton instance
+  static final MetricsService _instance = MetricsService._internal();
+
+  // Public factory constructor to return the same instance
+  factory MetricsService() => _instance;
+
+  // Private constructor
+  MetricsService._internal();
+
   static Map<String, String> buildAuthHeaders() {
     return <String, String>{
       'Authorization': 'Bearer ${UserStateController.user.value.accessToken}',

@@ -7,13 +7,10 @@ class AppWriteService {
   // Singleton pattern for shared instance
   static final AppWriteService _instance = AppWriteService._internal();
 
-  late final Client _client;
-  late final Storage _storage;
+  // Public factory constructor to return the same instance
+  factory AppWriteService() => _instance;
 
-  factory AppWriteService() {
-    return _instance;
-  }
-
+  // Private constructor
   AppWriteService._internal() {
     _client =
         Client()
@@ -23,6 +20,9 @@ class AppWriteService {
 
     _storage = Storage(_client);
   }
+
+  late final Client _client;
+  late final Storage _storage;
 
   /// Uploads an image file to the Appwrite storage bucket and returns the public view URL
   Future<String?> uploadImage(final XFile file) async {

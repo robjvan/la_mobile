@@ -195,7 +195,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
       }
 
       if (_formValid) {
-        final PlantModel? result = await PlantsService.addNewPlant(
+        final PlantModel? result = await PlantsService().addNewPlant(
           PlantModel(
             name: _nameController.text,
             species: _speciesController.text,

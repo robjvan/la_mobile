@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
     AppStateController.setLoadingState(true);
 
     final http.Response response =
-        await NetworkService.checkNetworkConnection();
+        await NetworkService().checkNetworkConnection();
 
     if (response.statusCode == 200) {
       setState(() {
