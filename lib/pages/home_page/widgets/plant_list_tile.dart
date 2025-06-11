@@ -12,7 +12,7 @@ class PlantListTile extends StatelessWidget {
   Icon? buildTrailingIcon() {
     Icon? icon;
 
-    if ((plant.imageUrls == null) || (plant.imageUrls!.isEmpty)) {
+    if (plant.lastWateredAt == null) {
       icon = Icon(Icons.warning_rounded, color: AppColors.red);
     }
     // TODO(RV): Add check for overdue watering or fertilizing, overwrite icon as necessary
@@ -26,12 +26,19 @@ class PlantListTile extends StatelessWidget {
       onTap: () {
         Get.dialog(PlantDetailsDialog(plant));
       },
-      leading:
-          (plant.imageUrls != null) &&
-                  plant.imageUrls!.isNotEmpty &&
-                  plant.imageUrls![0] != null
-              ? CachedNetworkImage(imageUrl: plant.imageUrls![0])
-              : Image.asset('assets/images/image_placeholder.png'),
+      leading: ClipRRect(
+        borderRadius: BorderRadiusGeometry.circular(4),
+        child:
+            (plant.imageUrls != null) &&
+                    plant.imageUrls!.isNotEmpty &&
+                    plant.imageUrls![0] != null
+                ? CachedNetworkImage(
+                  imageUrl: plant.imageUrls![0],
+                  width: 56.0,
+                  fit: BoxFit.cover,
+                )
+                : Image.asset('assets/images/image_placeholder.png'),
+      ),
       title: Text(
         plant.name ?? '',
         style: TextStyle(color: AppTheme.textColor()),
