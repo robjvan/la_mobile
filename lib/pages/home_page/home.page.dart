@@ -116,34 +116,39 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(final BuildContext context) {
-    return Scaffold(
-      floatingActionButton: LaSpeedDial(),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kAppBarHeight),
-        child: LaAppbar(title: 'dashboard'.tr),
-      ),
-      backgroundColor: AppTheme.backgroundColor(),
-      body: SizedBox(
-        width: Get.width,
-        height: Get.height,
-        child: SafeArea(
-          child: Obx(
-            () => Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                const SizedBox(height: 8.0),
-                if (AppStateController.showFilterBar.value) _buildHeader(),
-                Expanded(
-                  child: Obx(
-                    () =>
-                        AppStateController.isLoading.value
-                            ? _buildLoadingWidget()
-                            : AppStateController.viewAsList.value
-                            ? _buildListView()
-                            : _buildGridView(),
+    return Obx(
+      () => Scaffold(
+        floatingActionButton: LaSpeedDial(),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(kAppBarHeight),
+          child: LaAppbar(title: 'dashboard'.tr),
+        ),
+        backgroundColor:
+            AppStateController.useDarkMode.value
+                ? AppColors.bgColorDarkMode
+                : AppColors.bgColorLightMode,
+        body: SizedBox(
+          width: Get.width,
+          height: Get.height,
+          child: SafeArea(
+            child: Obx(
+              () => Column(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  const SizedBox(height: 8.0),
+                  if (AppStateController.showFilterBar.value) _buildHeader(),
+                  Expanded(
+                    child: Obx(
+                      () =>
+                          AppStateController.isLoading.value
+                              ? _buildLoadingWidget()
+                              : AppStateController.viewAsList.value
+                              ? _buildListView()
+                              : _buildGridView(),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
