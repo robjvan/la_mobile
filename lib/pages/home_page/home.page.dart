@@ -28,92 +28,6 @@ class _HomePageState extends State<HomePage> {
     PlantsService().fetchUserPlants();
   }
 
-  LaSearchBar _buildHeader() {
-    return LaSearchBar();
-  }
-
-  Column _buildLoadingWidget() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-          height: 32.0,
-          child: CircularProgressIndicator(color: AppColors.green),
-        ),
-        const SizedBox(height: 16.0),
-        Text(
-          'Loading data...'.tr, // TODO(RV): Add i18n strings
-          style: TextStyle(
-            fontSize: 18.0,
-            fontStyle: FontStyle.italic,
-            color: AppTheme.textColor(),
-          ),
-        ),
-      ],
-    );
-  }
-
-  List<PlantModel> _buildPlantsList() {
-    if (AppStateController.searchTerm.value == '') {
-      return UserStateController.userPlants;
-    } else {
-      final String cleanedSearchTerm =
-          AppStateController.searchTerm.value.toLowerCase();
-
-      return UserStateController.userPlants.where((final PlantModel p) {
-        if (p.name != null) {
-          final String cleanedName = p.name!.toLowerCase();
-          if (cleanedName.contains(cleanedSearchTerm)) return true;
-        }
-
-        if (p.location != null) {
-          final String cleanedLocation = p.location!.toLowerCase();
-          if (cleanedLocation.contains(cleanedSearchTerm)) return true;
-        }
-
-        if (p.notes != null && p.notes!.isNotEmpty) {
-          p.notes!.map((final dynamic note) {
-            if (note.toLowercase().contains(cleanedSearchTerm)) return true;
-          });
-        }
-
-        if (p.tags != null && p.tags!.isNotEmpty) {
-          p.tags!.map((final dynamic tag) {
-            if (tag.toLowercase().contains(cleanedSearchTerm)) return true;
-          });
-        }
-
-        return false;
-      }).toList();
-    }
-  }
-
-  ListView _buildListView() {
-    return ListView.builder(
-      itemCount: _buildPlantsList().length,
-      shrinkWrap: true,
-      itemBuilder: (final _, final int index) {
-        return PlantListTile(_buildPlantsList()[index]);
-      },
-    );
-  }
-
-  GridView _buildGridView() {
-    return GridView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      shrinkWrap: true,
-      itemCount: _buildPlantsList().length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 4.0,
-        mainAxisSpacing: 4.0,
-      ),
-      itemBuilder: (final _, final int index) {
-        return PlantGridTile(_buildPlantsList()[index]);
-      },
-    );
-  }
-
   @override
   Widget build(final BuildContext context) {
     return Obx(
@@ -153,6 +67,97 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  /// Private method used to filter plant list based on search values.
+  List<PlantModel> _buildPlantsList() {
+    if (AppStateController.searchTerm.value == '') {
+      return UserStateController.userPlants;
+    } else {
+      final String cleanedSearchTerm =
+          AppStateController.searchTerm.value.toLowerCase();
+
+      return UserStateController.userPlants.where((final PlantModel p) {
+        if (p.name != null) {
+          final String cleanedName = p.name!.toLowerCase();
+          if (cleanedName.contains(cleanedSearchTerm)) return true;
+        }
+
+        if (p.location != null) {
+          final String cleanedLocation = p.location!.toLowerCase();
+          if (cleanedLocation.contains(cleanedSearchTerm)) return true;
+        }
+
+        if (p.notes != null && p.notes!.isNotEmpty) {
+          p.notes!.map((final dynamic note) {
+            if (note.toLowercase().contains(cleanedSearchTerm)) return true;
+          });
+        }
+
+        if (p.tags != null && p.tags!.isNotEmpty) {
+          p.tags!.map((final dynamic tag) {
+            if (tag.toLowercase().contains(cleanedSearchTerm)) return true;
+          });
+        }
+
+        return false;
+      }).toList();
+    }
+  }
+
+  /// Builds the page header.
+  LaSearchBar _buildHeader() {
+    return LaSearchBar();
+  }
+
+  /// Builds a dynamic loading widget to display while fetching data.
+  Column _buildLoadingWidget() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          height: 32.0,
+          child: CircularProgressIndicator(color: AppColors.green),
+        ),
+        const SizedBox(height: 16.0),
+        Text(
+          'Loading data...'.tr, // TODO(RV): Add i18n strings
+          style: TextStyle(
+            fontSize: 18.0,
+            fontStyle: FontStyle.italic,
+            color: AppTheme.textColor(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Builds the homepage in a list view.
+  ListView _buildListView() {
+    return ListView.builder(
+      itemCount: _buildPlantsList().length,
+      shrinkWrap: true,
+      itemBuilder: (final _, final int index) {
+        return PlantListTile(_buildPlantsList()[index]);
+      },
+    );
+  }
+
+  /// Builds the homepage in a grid view.
+  GridView _buildGridView() {
+    return GridView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      shrinkWrap: true,
+      itemCount: _buildPlantsList().length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 4.0,
+        mainAxisSpacing: 4.0,
+      ),
+      itemBuilder: (final _, final int index) {
+        return PlantGridTile(_buildPlantsList()[index]);
+      },
     );
   }
 }
