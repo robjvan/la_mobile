@@ -208,7 +208,9 @@ class _AddPlantPageState extends State<AddPlantPage> {
                     ? int.tryParse(_wateringIntervalController.text)
                     : null,
             lastWateredAt:
-                _wateringReminderEnabled ? _lastWateredAt.toString() : null,
+                _wateringReminderEnabled
+                    ? _lastWateredAt?.toIso8601String()
+                    : null,
             waterAmount: _wateringReminderEnabled ? _waterAmount : null,
             fertilizerAmount:
                 _wateringReminderEnabled ? _fertilizerAmount : null,
@@ -219,7 +221,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
                     : null,
             lastFertilizedAt:
                 _fertilizerReminderEnabled
-                    ? _lastFertilizedAt.toString()
+                    ? _lastFertilizedAt?.toIso8601String()
                     : null,
             humidityPreference:
                 _humidityPreference != null
@@ -239,17 +241,23 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
         AppStateController.setLoadingState(false);
         if (result != null) {
-          // TODO(RV): Add success toast
           Get.back();
+          Get.snackbar(
+            'Sucess'.tr,
+            'The new plant has been added to your collection'.tr,
+            icon: Icon(Icons.check, color: AppColors.green),
+            shouldIconPulse: true,
+            isDismissible: true,
+            duration: Duration(seconds: 2),
+            barBlur: 20,
+          );
         } else {
           // TODO(RV): Add error dialog - "could not create plant record, try again later"
         }
         setState(() => _isUploading = false);
       }
     } on Exception catch (e) {
-      debugPrint(
-        'Failed to create new plant record'.tr, // TODO(RV): Add i18n strings
-      );
+      debugPrint('new-plant.error'.tr);
       print(e);
     }
   }
@@ -362,7 +370,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
                 //# Name field
                 LaTextInputField(
-                  label: 'name'.tr, // TODO(RV): Add i18n strings
+                  label: 'new-plant.name'.tr,
                   controller: _nameController,
                   hintText: 'new-plant.name-hint'.tr,
                   validator: (final dynamic val) {
@@ -376,17 +384,15 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
                 //# Species field
                 LaTextInputField(
-                  label: 'species'.tr, // TODO(RV): Add i18n strings
+                  label: 'new-plant.species'.tr,
                   controller: _speciesController,
-                  hintText:
-                      'e.g. "Chlorophytum comosum" or "African Lily"'
-                          .tr, // TODO(RV): Add i18n strings
+                  hintText: 'new-plant.species-hint'.tr,
                 ),
                 const SizedBox(height: 16.0),
 
                 //# Location field
                 LaTextInputField(
-                  label: 'location'.tr, // TODO(RV): Add i18n strings
+                  label: 'new-plant.location'.tr,
                   controller: _locationController,
                   hintText: 'new-plant.location-hint'.tr,
                 ),
@@ -432,7 +438,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
                   controller: _wateringIntervalController,
                 ),
 
-                //# "Last watered" date picker, optional
+                //# "Last watered" date picker, required if reminders are enabled
                 LaDatePicker(
                   label: 'new-plant.last-watered'.tr,
                   variable: _lastWateredAt,
@@ -498,9 +504,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
                 //# "Last fertilized" date picker, optional
                 LaDatePicker(
-                  label:
-                      'Last fertilized (optional):'
-                          .tr, // TODO(RV): Add i18n strings
+                  label: 'new-plant.last-fertilized'.tr,
                   variable: _lastFertilizedAt,
                   condition: _fertilizerReminderEnabled,
                   onPressed: () async {
@@ -525,10 +529,11 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
                 //# Soil type field
                 LaTextInputField(
-                  label: 'soil type'.tr,
+                  label: 'new-plant.soil-type'.tr,
                   controller: _soilTypeController,
                   hintText: 'e.g. rocky, or loam',
                 ),
+                const SizedBox(height: 16.0),
 
                 //# Humidity preference 3-way switch
                 LaPreferenceToggle(
@@ -545,7 +550,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
                         break;
                     }
                   },
-                  label: 'Humidity Preference'.tr, // TODO(RV): Add i18n strings
+                  label: 'new-plant.humidity-preference'.tr,
                 ),
                 const SizedBox(height: 16.0),
 
@@ -564,11 +569,9 @@ class _AddPlantPageState extends State<AddPlantPage> {
                         break;
                     }
                   },
-                  label: 'Sunlight Preference'.tr, // TODO(RV): Add i18n strings
+                  label: 'new-plant.sunlight-preference'.tr,
                 ),
                 const SizedBox(height: 24.0),
-
-                // TODO(RV): Add soiltype input field?
 
                 //# Notes field
                 NotesField(
