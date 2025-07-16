@@ -14,6 +14,9 @@ final Map<String, String> englishStrings = <String, String>{
   'tags': 'Tags',
   'close': 'Close',
   'sign-up': 'Sign Up',
+  'low': 'Low',
+  'medium': 'Med',
+  'high': 'High',
 
   // Speed dial string
   'speed-dial.add-new-plant': 'Add new plant',
@@ -154,6 +157,7 @@ final Map<String, String> englishStrings = <String, String>{
 
   // New plant page string
   'add-plant': 'Add Plant',
+  'new-plant.error': 'Failed to create new plant record',
   'new-plant.no-empty-watered-date':
       'Last watered date cannot be empty if watering reminders are enabled',
   'new-plant.no-empty-fertiized-date':
@@ -172,6 +176,13 @@ final Map<String, String> englishStrings = <String, String>{
   'new-plant.notes': 'Notes',
   'new-plant.notes-hint': 'e.g. "Avoid direct sunlight"',
   'new-plant.tags-hint': 'e.g. "cactus" or "flowers"',
+  'new-plant.name': 'Name',
+  'new-plant.species': 'Species',
+  'new-plant.location': 'Location',
+  'new-plant.humidity-preference': 'Humidity Preference',
+  'new-plant.sunlight-preference': 'Sunlight Preference',
+  'new-plant.image-type-error': 'This image type is not supported',
+  'new-plant.soil-type': 'Soil Type',
 
   // Plant strings
   'plants.no-records': 'No watering records yet!',

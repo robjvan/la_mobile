@@ -54,12 +54,7 @@ class ImageBox extends StatelessWidget {
                     final Object error,
                     final StackTrace? stackTrace,
                   ) {
-                    return Center(
-                      child: Text(
-                        'This image type is not supported'
-                            .tr, // TODO(RV): Add i18n strings
-                      ),
-                    );
+                    return Center(child: Text('new-plant.image-type-error'.tr));
                   },
                 ),
               ),
