@@ -52,7 +52,7 @@ class LoginButton extends StatelessWidget {
             await Get.offAllNamed(kHomeRouteName);
 
             // Fetch user data - user, profile, plants, etc.
-            await PlantsService().fetchUserPlants();
+            await PlantsService.fetchUserPlants();
             AppStateController.setLoadingState(false);
           } else {
             unawaited(Get.dialog(const BadCredentialsDialog()));
