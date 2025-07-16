@@ -16,19 +16,24 @@ class PlantListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
       child: Obx(
-        () => ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(10),
+        () => Material(
+          elevation: 4,
+          shadowColor: Colors.black54,
+          borderRadius: BorderRadius.circular(10),
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(10),
+            ),
+            tileColor:
+                AppStateController.useDarkMode.value
+                    ? const Color(0xFF303030)
+                    : const Color(0xFFEEEEEE),
+            onTap: () => Get.dialog(PlantDetailsDialog(plant)),
+            leading: _buildPlantImage(),
+            title: _buildTitle(),
+            subtitle: _buildSubtitle(),
+            trailing: _buildTrailingIcons(),
           ),
-          tileColor:
-              AppStateController.useDarkMode.value
-                  ? Colors.white10
-                  : const Color(0xFFEEEEEE),
-          onTap: () => Get.dialog(PlantDetailsDialog(plant)),
-          leading: _buildPlantImage(),
-          title: _buildTitle(),
-          subtitle: _buildSubtitle(),
-          trailing: _buildTrailingIcons(),
         ),
       ),
     );
@@ -52,20 +57,35 @@ class PlantListTile extends StatelessWidget {
   }
 
   /// Builds the plant title widget.
-  Text _buildTitle() {
-    return Text(
-      plant.name ?? '',
-      style: TextStyle(color: AppTheme.textColor()),
+  Widget _buildTitle() {
+    return Obx(
+      () => Text(
+        plant.name ?? '',
+        style: TextStyle(
+          color:
+              AppStateController.useDarkMode.value
+                  ? AppColors.textColorDarkMode
+                  : AppColors.textColorLightMode,
+        ),
+      ),
     );
   }
 
   /// Builds the plant subtitle widget.  This may be a warning message or description.
-  Text _buildSubtitle() {
-    return Text(
-      plant.lastWateredAt != null
-          ? 'Last watered: ${plant.lastWateredAt!.substring(0, 10)}'
-              .tr // TODO(RV): Add i18n strings
-          : 'plants.no-records'.tr,
+  Widget _buildSubtitle() {
+    return Obx(
+      () => Text(
+        plant.lastWateredAt != null
+            ? 'Last watered: ${plant.lastWateredAt!.substring(0, 10)}'
+                .tr // TODO(RV): Add i18n strings
+            : 'plants.no-records'.tr,
+        style: TextStyle(
+          color:
+              AppStateController.useDarkMode.value
+                  ? AppColors.textColorDarkMode
+                  : AppColors.textColorLightMode,
+        ),
+      ),
     );
   }
 

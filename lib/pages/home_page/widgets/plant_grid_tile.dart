@@ -18,22 +18,40 @@ class PlantGridTile extends StatelessWidget {
       onTap: () {
         unawaited(Get.dialog(PlantDetailsDialog(plant)));
       },
-      child: ClipRRect(
-        borderRadius: BorderRadiusGeometry.circular(8),
-        child: Stack(
-          children: <Widget>[
-            GridTile(
-              footer: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.black54),
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Row(children: <Widget>[_buildTitle()]),
+      child: Material(
+        elevation: 4,
+        shadowColor: AppColors.black,
+        borderRadius: BorderRadius.circular(8),
+
+        // DecoratedBox(
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(8),
+        //     boxShadow: [
+        //       BoxShadow(
+        //         color: Colors.black45,
+        //         spreadRadius: -1,
+        //         blurRadius: 3,
+        //         offset: Offset(2, 3),
+        //       ),
+        //     ],
+        //   ),
+        child: ClipRRect(
+          borderRadius: BorderRadiusGeometry.circular(8),
+          child: Stack(
+            children: <Widget>[
+              GridTile(
+                footer: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.black54),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(children: <Widget>[_buildTitle()]),
+                  ),
                 ),
+                child: _buildPlantImage(),
               ),
-              child: _buildPlantImage(),
-            ),
-            _buildTrailingIcons(),
-          ],
+              _buildTrailingIcons(),
+            ],
+          ),
         ),
       ),
     );
