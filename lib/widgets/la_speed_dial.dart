@@ -57,28 +57,22 @@ class LaSpeedDial extends StatelessWidget {
           buildSpeedDialChild(
             Icon(Icons.settings, color: Colors.blueGrey),
             'settings'.tr,
-            () {
-              // Get.dialog(SettingsDialog());
-              Get.toNamed(kSettingsRouteName);
-            },
+            () => Get.toNamed(kSettingsRouteName),
           ),
           buildSpeedDialChild(
             Icon(Icons.add, color: AppColors.green),
             'speed-dial.add-new-plant'.tr,
-            () {
-              Get.toNamed(kAddPlantPageRoutename);
-              // await Get.dialog(AddPlantDialog());
-            },
+            () => Get.toNamed(kAddPlantPageRoutename),
           ),
           buildSpeedDialChild(
             Icon(Icons.water_drop, color: AppColors.lightBlue),
             'speed-dial.record-watering'.tr,
-            () {},
+            () => Get.toNamed(kRecordWateringRouteName),
           ),
           buildSpeedDialChild(
             Icon(Icons.grain, color: Colors.brown),
             'speed-dial.record-fertilizing'.tr,
-            () {},
+            () => Get.toNamed(kRecordFertilizingRouteName),
           ),
           buildSpeedDialChild(
             Icon(Icons.insights, color: Colors.orange),

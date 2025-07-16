@@ -5,6 +5,8 @@ import 'package:la_mobile/pages/admin_dashboard_page/admin_dashboard.page.dart';
 import 'package:la_mobile/pages/forgot_pass_page/forgot_password.page.dart';
 import 'package:la_mobile/pages/home_page/home.page.dart';
 import 'package:la_mobile/pages/login_page/login.page.dart';
+import 'package:la_mobile/pages/record_fertilizing_page/record_fertilizing.page.dart';
+import 'package:la_mobile/pages/record_watering_page/record_watering.page.dart';
 import 'package:la_mobile/pages/register_page/register.page.dart';
 import 'package:la_mobile/pages/settings_page/settings.page.dart';
 import 'package:la_mobile/pages/splash_page/splash.page.dart';
@@ -25,6 +27,15 @@ class AppRoutes {
     GetPage<dynamic>(name: kSplashRouteName, page: SplashPage.new),
     GetPage<dynamic>(name: kAddPlantPageRoutename, page: AddPlantPage.new),
     GetPage<dynamic>(name: kAdminDashboardRouteName, page: AdminDashboard.new),
+    GetPage<dynamic>(name: kSettingsRouteName, page: SettingsPage.new),
+    GetPage<dynamic>(
+      name: kRecordWateringRouteName,
+      page: RecordWateringPage.new,
+    ),
+    GetPage<dynamic>(
+      name: kRecordFertilizingRouteName,
+      page: RecordFertilizingPage.new,
+    ),
     GetPage<dynamic>(name: kSettingsRouteName, page: SettingsPage.new),
   ];
 }
