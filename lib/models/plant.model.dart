@@ -1,4 +1,5 @@
 class PlantModel {
+  final int? id;
   final String? name;
   final String? species;
   final List<dynamic>? imageUrls;
@@ -21,6 +22,7 @@ class PlantModel {
   final int? userId;
 
   PlantModel({
+    this.id,
     required this.name,
     required this.fertilizerReminderEnabled,
     required this.wateringReminderEnabled,
@@ -44,6 +46,7 @@ class PlantModel {
   });
 
   factory PlantModel.initial() => PlantModel(
+    id: null,
     name: null,
     species: null,
     imageUrls: <String>[],
@@ -66,6 +69,7 @@ class PlantModel {
   );
 
   factory PlantModel.fromMap(final Map<String, dynamic> json) => PlantModel(
+    id: json['id'],
     name: json['name'],
     species: json['species'],
     imageUrls: json['imageUrls'],
@@ -89,6 +93,7 @@ class PlantModel {
   );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
+    'id': id,
     'name': name,
     'species': species,
     'imageUrls': imageUrls,
