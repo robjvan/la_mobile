@@ -20,7 +20,7 @@ class PlantsService {
   PlantsService._internal();
 
   /// Private method used to Build authorization headers with access token
-  Map<String, String> _buildAuthHeaders() {
+  static Map<String, String> _buildAuthHeaders() {
     return <String, String>{
       'Authorization': 'Bearer ${UserStateController.user.value.accessToken}',
       'Content-Type': 'application/json; charset=UTF-8',
@@ -34,10 +34,12 @@ class PlantsService {
     final bool error = false,
   }) {
     if (error) {
-      return Icon(
-        Icons.error_outline,
-        color: AppColors.red,
-        size: 16.0, // TODO(RV): Add dynamic sizing based on grid/list view
+      return Obx(
+        () => Icon(
+          Icons.error_outline,
+          color: AppColors.red,
+          size: AppStateController.viewAsList.value ? 24 : 16.0,
+        ),
       );
     }
     return Obx(
@@ -46,8 +48,8 @@ class PlantsService {
               ? Icon(
                 iconData,
                 color: color,
-                size:
-                    16.0, // TODO(RV): Add dynamic sizing based on grid/list view
+
+                size: AppStateController.viewAsList.value ? 24 : 16.0,
               )
               : Container(
                 decoration: BoxDecoration(
@@ -58,15 +60,15 @@ class PlantsService {
                 child: Icon(
                   iconData,
                   color: color,
-                  size:
-                      16.0, // TODO(RV): Add dynamic sizing based on grid/list view
+
+                  size: AppStateController.viewAsList.value ? 24 : 16.0,
                 ),
               ),
     );
   }
 
   /// Fetch all plants associated with the current user
-  Future<void> fetchUserPlants() async {
+  static Future<void> fetchUserPlants() async {
     try {
       AppStateController.setLoadingState(true);
 
@@ -118,16 +120,6 @@ class PlantsService {
       AppStateController.setLoadingState(false);
       return null;
     }
-  }
-
-  /// Mark a plant as watered (stub)
-  Future<void> markPlantAsWatered() async {
-    // TODO(RV): Implement logic
-  }
-
-  /// Mark a plant as fertilized (stub)
-  Future<void> markPlantAsFertilized() async {
-    // TODO(RV): Implement logic
   }
 
   /// Clear local plant list
@@ -193,4 +185,52 @@ class PlantsService {
 
     return icons;
   }
+
+  /// Mark one or more plants as watered
+  static Future<bool> markPlantAction(
+    final List<int> plantIds, {
+    required final PlantAction action,
+  }) async {
+    Uri endpoint;
+
+    switch (action) {
+      case PlantAction.water:
+        endpoint = Uri.parse('${AppSecrets.serverUrl}/$kPlantsEndpoint/water');
+        break;
+      case PlantAction.fertilize:
+        endpoint = Uri.parse(
+          '${AppSecrets.serverUrl}/$kPlantsEndpoint/fertilize',
+        );
+        break;
+    }
+
+    try {
+      final http.Response response = await http.post(
+        endpoint,
+        body: jsonEncode(<String, dynamic>{'plantIds': plantIds}),
+        headers: _buildAuthHeaders(),
+      );
+
+      AppStateController.setLoadingState(false);
+
+      if (response.statusCode == 201) {
+        await fetchUserPlants(); // Refresh local list
+        Get.back();
+        return true;
+      }
+
+      Get.back();
+      print(
+        'Failed to mark plants as ${action == PlantAction.water ? 'watered' : 'fertilized'}',
+      );
+      return false;
+    } catch (e) {
+      print(
+        'Error marking plants as ${action == PlantAction.water ? 'watered' : 'fertilized'}: $e',
+      );
+      return false;
+    }
+  }
 }
+
+enum PlantAction { water, fertilize }
