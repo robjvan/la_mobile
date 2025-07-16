@@ -27,8 +27,8 @@ class _LaAppbarState extends State<LaAppbar> {
             () => IconButton(
               icon: Icon(
                 AppStateController.viewAsList.value
-                    ? Icons.view_list
-                    : Icons.apps,
+                    ? Icons.apps
+                    : Icons.view_list,
               ),
               onPressed: AppStateController.toggleListView,
             ),
