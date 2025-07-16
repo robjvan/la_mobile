@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     // Fetch user data - user, profile, plants, etc.
-    PlantsService().fetchUserPlants();
+    PlantsService.fetchUserPlants();
   }
 
   @override
@@ -152,8 +152,8 @@ class _HomePageState extends State<HomePage> {
       itemCount: _buildPlantsList().length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 4.0,
-        mainAxisSpacing: 4.0,
+        crossAxisSpacing: 6.0,
+        mainAxisSpacing: 6.0,
       ),
       itemBuilder: (final _, final int index) {
         return PlantGridTile(_buildPlantsList()[index]);
