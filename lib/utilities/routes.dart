@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
+import 'package:la_mobile/models/plant_action.enum.dart';
 import 'package:la_mobile/pages/add_plant_page/add_plant.page.dart';
 import 'package:la_mobile/pages/admin_dashboard_page/admin_dashboard.page.dart';
 import 'package:la_mobile/pages/forgot_pass_page/forgot_password.page.dart';
 import 'package:la_mobile/pages/home_page/home.page.dart';
 import 'package:la_mobile/pages/login_page/login.page.dart';
-import 'package:la_mobile/pages/record_fertilizing_page/record_fertilizing.page.dart';
-import 'package:la_mobile/pages/record_watering_page/record_watering.page.dart';
+import 'package:la_mobile/pages/record_action_page/record_action.page.dart';
 import 'package:la_mobile/pages/register_page/register.page.dart';
 import 'package:la_mobile/pages/settings_page/settings.page.dart';
 import 'package:la_mobile/pages/splash_page/splash.page.dart';
@@ -29,12 +29,11 @@ class AppRoutes {
     GetPage<dynamic>(name: kAdminDashboardRouteName, page: AdminDashboard.new),
     GetPage<dynamic>(name: kSettingsRouteName, page: SettingsPage.new),
     GetPage<dynamic>(
-      name: kRecordWateringRouteName,
-      page: RecordWateringPage.new,
-    ),
-    GetPage<dynamic>(
-      name: kRecordFertilizingRouteName,
-      page: RecordFertilizingPage.new,
+      name: kRecordPlantActionRouteName,
+      page: () {
+        final PlantAction action = Get.arguments as PlantAction;
+        return RecordPlantActionPage(action: action);
+      },
     ),
     GetPage<dynamic>(name: kSettingsRouteName, page: SettingsPage.new),
   ];
