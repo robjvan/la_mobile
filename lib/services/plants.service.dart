@@ -6,6 +6,7 @@ import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
+import 'package:la_mobile/models/plant_action.enum.dart';
 import 'package:la_mobile/secrets.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
@@ -128,7 +129,7 @@ class PlantsService {
   }
 
   /// Builds a list of status icons based on plant needs, ie. watering/fertilizer overdue.
-  static List<Widget> buildTileIcons(final PlantModel plant) {
+  static List<Widget> buildStatusIcons(final PlantModel plant) {
     final List<Widget> icons = <Widget>[];
 
     // Check for overdue plant watering
@@ -162,7 +163,7 @@ class PlantsService {
         );
 
         if (DateTime.now().isAfter(nextFertilizing)) {
-          icons.add(_buildIcon(iconData: Icons.grain, color: Colors.brown));
+          icons.add(_buildIcon(iconData: Icons.grass, color: Colors.brown));
         }
       } on Exception catch (_) {
         icons.add(_buildIcon(error: true));
@@ -170,16 +171,15 @@ class PlantsService {
     }
 
     // Watering interval set but reminder not enabled
-    if (plant.waterIntervalDays != null &&
-        plant.wateringReminderEnabled == false) {
+    if (plant.waterIntervalDays != null && plant.reminderEnabled == false) {
       icons.add(
         _buildIcon(iconData: Icons.timer_off, color: AppColors.lightBlue),
       );
     }
 
     // Fertilizer interval set but reminder not enabled
-    if (plant.fertilizerReminderEnabled &&
-        plant.fertilizerIntervalDays == null) {
+    if (plant.fertilizerIntervalDays != null &&
+        plant.fertilizerReminderEnabled == false) {
       icons.add(_buildIcon(iconData: Icons.timer_off, color: Colors.brown));
     }
 
@@ -191,6 +191,7 @@ class PlantsService {
     final List<int> plantIds, {
     required final PlantAction action,
   }) async {
+    AppStateController.setLoadingState(true);
     Uri endpoint;
 
     switch (action) {
@@ -215,14 +216,11 @@ class PlantsService {
 
       if (response.statusCode == 201) {
         await fetchUserPlants(); // Refresh local list
-        Get.back();
+        // Get.back();
         return true;
       }
 
-      Get.back();
-      print(
-        'Failed to mark plants as ${action == PlantAction.water ? 'watered' : 'fertilized'}',
-      );
+      // Get.back();
       return false;
     } catch (e) {
       print(
@@ -231,6 +229,47 @@ class PlantsService {
       return false;
     }
   }
-}
 
-enum PlantAction { water, fertilize }
+  static toggleReminder(final int plantId, final PlantAction action) async {
+    AppStateController.setLoadingState(true);
+
+    print('fired');
+
+    Uri endpoint;
+
+    switch (action) {
+      case PlantAction.water:
+        endpoint = Uri.parse(
+          '${AppSecrets.serverUrl}/$kPlantsEndpoint/water/toggle-reminders/$plantId',
+        );
+        break;
+      case PlantAction.fertilize:
+        endpoint = Uri.parse(
+          '${AppSecrets.serverUrl}/$kPlantsEndpoint/fertilize/toggle-reminders/$plantId',
+        );
+        break;
+    }
+
+    try {
+      final http.Response response = await http.patch(
+        endpoint,
+        // body: jsonEncode(<String, dynamic>{'id': plantIds}),
+        headers: _buildAuthHeaders(),
+      );
+      AppStateController.setLoadingState(false);
+      if (response.statusCode == 200) {
+        await fetchUserPlants(); // Refresh local list
+        // Get.back();
+        return true;
+      }
+
+      // Get.back();
+      return false;
+    } on Exception catch (e) {
+      print(
+        'Error marking plants as ${action == PlantAction.water ? 'watered' : 'fertilized'}: $e',
+      );
+      return false;
+    }
+  }
+}
