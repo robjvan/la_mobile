@@ -59,7 +59,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
   PreferenceEnum? _sunlightPreference;
   DateTime? _lastWateredAt;
   DateTime? _lastFertilizedAt;
-  bool _wateringReminderEnabled = true;
+  bool _reminderEnabled = true;
   bool _fertilizerReminderEnabled = false;
 
   // Used to create a dynamic experience while processing completes
@@ -173,7 +173,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
 
       _formValid = _formKey.currentState!.validate();
 
-      if (_wateringReminderEnabled) {
+      if (_reminderEnabled) {
         if (_lastWateredAt == null) {
           _formValid = false;
           await Get.dialog(ErrorDialog('new-plant.no-empty-watered-date'.tr));
@@ -202,18 +202,15 @@ class _AddPlantPageState extends State<AddPlantPage> {
             species: _speciesController.text,
             imageUrls: _imageUrl != null ? <String?>[_imageUrl] : <void>[],
             archived: false,
-            wateringReminderEnabled: _wateringReminderEnabled,
+            reminderEnabled: _reminderEnabled,
             waterIntervalDays:
-                _wateringReminderEnabled
+                _reminderEnabled
                     ? int.tryParse(_wateringIntervalController.text)
                     : null,
             lastWateredAt:
-                _wateringReminderEnabled
-                    ? _lastWateredAt?.toIso8601String()
-                    : null,
-            waterAmount: _wateringReminderEnabled ? _waterAmount : null,
-            fertilizerAmount:
-                _wateringReminderEnabled ? _fertilizerAmount : null,
+                _reminderEnabled ? _lastWateredAt?.toIso8601String() : null,
+            waterAmount: _reminderEnabled ? _waterAmount : null,
+            fertilizerAmount: _reminderEnabled ? _fertilizerAmount : null,
             fertilizerReminderEnabled: _fertilizerReminderEnabled,
             fertilizerIntervalDays:
                 _fertilizerReminderEnabled
@@ -401,10 +398,10 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 //# Watering reminder checkbox
                 LaReminderToggle(
                   label: 'new-plant.watering-reminders'.tr,
-                  condition: _wateringReminderEnabled,
+                  condition: _reminderEnabled,
                   onChanged: (final bool? val) {
                     setState(() {
-                      _wateringReminderEnabled = val ?? false;
+                      _reminderEnabled = val ?? false;
                     });
                   },
                 ),
@@ -412,7 +409,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 //# Watering interval number picker, inactive unless reminder enabled
                 LaNumberPicker(
                   label: 'new-plant.watering-interval'.tr,
-                  condition: _wateringReminderEnabled,
+                  condition: _reminderEnabled,
                   onDecrementPressed: () {
                     setState(() {
                       int currentValue =
@@ -442,7 +439,7 @@ class _AddPlantPageState extends State<AddPlantPage> {
                 LaDatePicker(
                   label: 'new-plant.last-watered'.tr,
                   variable: _lastWateredAt,
-                  condition: _wateringReminderEnabled,
+                  condition: _reminderEnabled,
                   onPressed: () async {
                     final DateTime? date = await Get.dialog(
                       DatePickerDialog(

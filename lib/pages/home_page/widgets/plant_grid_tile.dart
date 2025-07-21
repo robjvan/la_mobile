@@ -16,7 +16,7 @@ class PlantGridTile extends StatelessWidget {
   Widget build(final BuildContext context) {
     return GestureDetector(
       onTap: () {
-        unawaited(Get.dialog(PlantDetailsDialog(plant)));
+        unawaited(Get.dialog(PlantDetailsDialog(plant.obs)));
       },
       child: Material(
         elevation: 4,
@@ -82,7 +82,7 @@ class PlantGridTile extends StatelessWidget {
       child: Row(
         spacing: 4.0,
         mainAxisAlignment: MainAxisAlignment.end,
-        children: PlantsService.buildTileIcons(plant),
+        children: PlantsService.buildStatusIcons(plant),
       ),
     );
   }
