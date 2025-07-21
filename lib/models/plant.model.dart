@@ -13,7 +13,7 @@ class PlantModel {
   final int? fertilizerIntervalDays;
   final String? lastFertilizedAt;
   final bool fertilizerReminderEnabled;
-  final bool wateringReminderEnabled;
+  final bool? reminderEnabled;
   final List<dynamic>? tags;
   final double? waterAmount;
   final double? fertilizerAmount;
@@ -25,7 +25,7 @@ class PlantModel {
     this.id,
     required this.name,
     required this.fertilizerReminderEnabled,
-    required this.wateringReminderEnabled,
+    required this.reminderEnabled,
     required this.userId,
     this.species,
     this.imageUrls,
@@ -60,7 +60,7 @@ class PlantModel {
     fertilizerIntervalDays: null,
     lastFertilizedAt: null,
     fertilizerReminderEnabled: false,
-    wateringReminderEnabled: false,
+    reminderEnabled: false,
     tags: null,
     waterAmount: null,
     fertilizerAmount: null,
@@ -83,7 +83,7 @@ class PlantModel {
     fertilizerIntervalDays: json['fertilizerIntervalDays'],
     lastFertilizedAt: json['lastFertilizedAt'],
     fertilizerReminderEnabled: json['fertilizerReminderEnabled'] ?? false,
-    wateringReminderEnabled: json['wateringReminderEnabled'] ?? false,
+    reminderEnabled: json['reminderEnabled'] ?? false,
     tags: json['tags'],
     waterAmount: json['waterAmount'],
     fertilizerAmount: json['fertilizerAmount'],
@@ -107,7 +107,7 @@ class PlantModel {
     'fertilizerIntervalDays': fertilizerIntervalDays,
     'lastFertilizedAt': lastFertilizedAt,
     'fertilizerReminderEnabled': fertilizerReminderEnabled,
-    'wateringReminderEnabled': wateringReminderEnabled,
+    'reminderEnabled': reminderEnabled,
     'tags': tags,
     'waterAmount': waterAmount,
     'fertilizerAmount': fertilizerAmount,
