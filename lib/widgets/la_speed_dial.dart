@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/controllers/user_state.controller.dart';
+import 'package:la_mobile/models/plant_action.enum.dart';
+import 'package:la_mobile/pages/record_action_page/record_action.page.dart';
 import 'package:la_mobile/services/metrics.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
 
@@ -67,12 +69,16 @@ class LaSpeedDial extends StatelessWidget {
           buildSpeedDialChild(
             Icon(Icons.water_drop, color: AppColors.lightBlue),
             'speed-dial.record-watering'.tr,
-            () => Get.toNamed(kRecordWateringRouteName),
+            () => Get.to(
+              () => const RecordPlantActionPage(action: PlantAction.water),
+            ),
           ),
           buildSpeedDialChild(
-            Icon(Icons.grain, color: Colors.brown),
+            Icon(Icons.grass, color: Colors.brown),
             'speed-dial.record-fertilizing'.tr,
-            () => Get.toNamed(kRecordFertilizingRouteName),
+            () => Get.to(
+              () => const RecordPlantActionPage(action: PlantAction.fertilize),
+            ),
           ),
           buildSpeedDialChild(
             Icon(Icons.insights, color: Colors.orange),
