@@ -73,36 +73,49 @@ class _HomePageState extends State<HomePage> {
   /// Private method used to filter plant list based on search values.
   List<PlantModel> _buildPlantsList() {
     if (AppStateController.searchTerm.value == '') {
-      return UserStateController.userPlants;
+      return List<PlantModel>.from(UserStateController.userPlants)..sort(
+        (final PlantModel a, final PlantModel b) =>
+            a.name!.toLowerCase().compareTo(b.name!.toLowerCase()),
+      );
     } else {
       final String cleanedSearchTerm =
           AppStateController.searchTerm.value.toLowerCase();
 
       return UserStateController.userPlants.where((final PlantModel p) {
-        if (p.name != null) {
-          final String cleanedName = p.name!.toLowerCase();
-          if (cleanedName.contains(cleanedSearchTerm)) return true;
-        }
+          if (p.name != null) {
+            final String cleanedName = p.name!.toLowerCase();
+            if (cleanedName.contains(cleanedSearchTerm)) return true;
+          }
 
-        if (p.location != null) {
-          final String cleanedLocation = p.location!.toLowerCase();
-          if (cleanedLocation.contains(cleanedSearchTerm)) return true;
-        }
+          if (p.location != null) {
+            final String cleanedLocation = p.location!.toLowerCase();
+            if (cleanedLocation.contains(cleanedSearchTerm)) return true;
+          }
 
-        if (p.notes != null && p.notes!.isNotEmpty) {
-          p.notes!.map((final dynamic note) {
-            if (note.toLowercase().contains(cleanedSearchTerm)) return true;
-          });
-        }
+          if (p.notes != null && p.notes!.isNotEmpty) {
+            if (p.notes!.any(
+              (final dynamic note) =>
+                  note.toLowerCase().contains(cleanedSearchTerm),
+            )) {
+              return true;
+            }
+          }
 
-        if (p.tags != null && p.tags!.isNotEmpty) {
-          p.tags!.map((final dynamic tag) {
-            if (tag.toLowercase().contains(cleanedSearchTerm)) return true;
-          });
-        }
+          if (p.tags != null && p.tags!.isNotEmpty) {
+            if (p.tags!.any(
+              (final dynamic tag) =>
+                  tag.toLowerCase().contains(cleanedSearchTerm),
+            )) {
+              return true;
+            }
+          }
 
-        return false;
-      }).toList();
+          return false;
+        }).toList()
+        ..sort(
+          (final PlantModel a, final PlantModel b) =>
+              a.name!.toLowerCase().compareTo(b.name!.toLowerCase()),
+        );
     }
   }
 
