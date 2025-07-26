@@ -29,6 +29,7 @@ const String kSettingsRouteName = '/settings';
 // const String kRecordWateringRouteName = '/record-watering';
 // const String kRecordFertilizingRouteName = '/record-fertilizing';
 const String kRecordPlantActionRouteName = '/record-action';
+const String kPlantDetailsPageRouteName = '/plant-details';
 
 // const String kLoginEndpoint = 'auth/login';
 // const String kRegisterEndpoint = 'auth/register';

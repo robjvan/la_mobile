@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:la_mobile/constants.dart';
+import 'package:la_mobile/models/plant.model.dart';
 import 'package:la_mobile/models/plant_action.enum.dart';
 import 'package:la_mobile/pages/add_plant_page/add_plant.page.dart';
 import 'package:la_mobile/pages/admin_dashboard_page/admin_dashboard.page.dart';
 import 'package:la_mobile/pages/forgot_pass_page/forgot_password.page.dart';
 import 'package:la_mobile/pages/home_page/home.page.dart';
 import 'package:la_mobile/pages/login_page/login.page.dart';
+import 'package:la_mobile/pages/plant_details_page/plant_details.page.dart';
 import 'package:la_mobile/pages/record_action_page/record_action.page.dart';
 import 'package:la_mobile/pages/register_page/register.page.dart';
 import 'package:la_mobile/pages/settings_page/settings.page.dart';
@@ -36,5 +38,12 @@ class AppRoutes {
       },
     ),
     GetPage<dynamic>(name: kSettingsRouteName, page: SettingsPage.new),
+    GetPage<dynamic>(
+      name: kPlantDetailsPageRouteName,
+      page: () {
+        final PlantModel plant = Get.arguments as PlantModel;
+        return PlantDetailsPage(plant);
+      },
+    ),
   ];
 }

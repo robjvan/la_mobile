@@ -6,9 +6,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:la_mobile/controllers/app_state.controller.dart';
 import 'package:la_mobile/models/plant.model.dart';
+import 'package:la_mobile/pages/plant_details_page/plant_details.page.dart';
 import 'package:la_mobile/services/plants.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
-import 'package:la_mobile/widgets/dialogs/plant_details.dialog.dart';
+// import 'package:la_mobile/widgets/dialogs/plant_details.dialog.dart';
 
 class PlantListTile extends StatelessWidget {
   final PlantModel plant;
@@ -24,7 +25,8 @@ class PlantListTile extends StatelessWidget {
 
   Widget _buildTile() {
     return GestureDetector(
-      onTap: () => Get.dialog(PlantDetailsDialog(plant.obs)),
+      onTap: () => Get.to(() => PlantDetailsPage(plant)),
+      // onTap: () => Get.dialog(PlantDetailsDialog(plant.obs)),
       child: Container(
         height: 100.0,
         decoration: BoxDecoration(
@@ -100,7 +102,7 @@ class PlantListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: 64.0,
+        width: 80.0,
         child: ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(4),
           child:
@@ -111,7 +113,10 @@ class PlantListTile extends StatelessWidget {
                     imageUrl: plant.imageUrls![0],
                     fit: BoxFit.cover,
                   )
-                  : Image.asset('assets/images/image_placeholder.png'),
+                  : Image.asset(
+                    'assets/images/image_placeholder.png',
+                    fit: BoxFit.cover,
+                  ),
         ),
       ),
     );

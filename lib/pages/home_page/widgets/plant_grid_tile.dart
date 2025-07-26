@@ -1,12 +1,13 @@
-import 'dart:async';
+// import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:la_mobile/models/plant.model.dart';
+import 'package:la_mobile/pages/plant_details_page/plant_details.page.dart';
 import 'package:la_mobile/services/plants.service.dart';
 import 'package:la_mobile/utilities/theme.dart';
-import 'package:la_mobile/widgets/dialogs/plant_details.dialog.dart';
+// import 'package:la_mobile/widgets/dialogs/plant_details.dialog.dart';
 
 class PlantGridTile extends StatelessWidget {
   final PlantModel plant;
@@ -15,9 +16,13 @@ class PlantGridTile extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        unawaited(Get.dialog(PlantDetailsDialog(plant.obs)));
-      },
+      onTap: () => Get.to(() => PlantDetailsPage(plant)),
+      // () {
+      //   unawaited(
+      //     Get.dialog(PlantDetailsDialog(plant.obs))
+
+      //     );
+      // },
       child: Material(
         elevation: 4,
         shadowColor: AppColors.black,
@@ -60,7 +65,7 @@ class PlantGridTile extends StatelessWidget {
   /// Builds the plant title widget.
   Text _buildTitle() {
     return Text(
-      plant.name ?? '',
+      plant.name!.capitalize ?? '',
       overflow: TextOverflow.ellipsis,
       style: TextStyle(color: AppColors.white),
     );
@@ -71,8 +76,17 @@ class PlantGridTile extends StatelessWidget {
     return (plant.imageUrls != null) &&
             plant.imageUrls!.isNotEmpty &&
             plant.imageUrls![0] != null
-        ? CachedNetworkImage(imageUrl: plant.imageUrls![0], fit: BoxFit.cover)
-        : Image.asset('assets/images/image_placeholder.png');
+        ? Hero(
+          tag: plant.id!,
+          child: CachedNetworkImage(
+            imageUrl: plant.imageUrls![0],
+            fit: BoxFit.cover,
+          ),
+        )
+        : Hero(
+          tag: plant.id!,
+          child: Image.asset('assets/images/image_placeholder.png'),
+        );
   }
 
   /// Builds a row of status icons based on plant needs, ie. watering/fertilizer overdue.
@@ -87,3 +101,6 @@ class PlantGridTile extends StatelessWidget {
     );
   }
 }
+// () => Get.to(
+//               () => const RecordPlantActionPage(action: PlantAction.water),
+//             ),
